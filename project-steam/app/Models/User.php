@@ -96,6 +96,12 @@ class User extends Model implements AuthenticatableContract
 		return $this->hasMany(DiscordServer::class);
 	}
 
+	public function discordAvatar()
+	{
+		$discord = new DiscordAPI();
+		return $discord->getAvatar($this->discord_id, $this->discordUser()['avatar']);
+	}
+
 	//get the steam user from the Steam API
 	public function steamUser()
 	{

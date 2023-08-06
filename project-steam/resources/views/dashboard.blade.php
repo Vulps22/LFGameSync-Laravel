@@ -9,9 +9,13 @@
 	<div class="flex-1">
 		<h1 class="text-2xl font-bold">{{ Auth()->user()->discordUser()['username'] }}</h1>
 
-		<img src="" alt="Avatar" class="w-16 h-16 rounded-full">
+		<img src="{{Auth()->user()->discordAvatar()}}" alt="Avatar" class="w-16 h-16 rounded-full">
 
+		<h1>Steam</h1>
 		@if(Auth()->user()->steam_id)
+		<img src="{{ Auth::user()->steamUser()['avatar'] }}">
+		<h4>{{ Auth()->user()->steamUser()['personaname'] }}</h4>
+		
 		<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Sync Games</button>
 		@endif
 
