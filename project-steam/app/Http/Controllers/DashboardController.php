@@ -13,7 +13,7 @@ class DashboardController extends Controller
 		if (!auth()->check()) return redirect('/');
 		
 		$this->syncDiscordServers();
-
+		//auth()->user()->steamUser();
 		return view('dashboard');
 	}
 

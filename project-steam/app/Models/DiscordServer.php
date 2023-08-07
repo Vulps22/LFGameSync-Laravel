@@ -10,7 +10,8 @@ class DiscordServer extends Model
 	protected $fillable = [
 		'user_id',
 		'server_id',
-		'name'
+		'name',
+		'icon_hash',
 	];
 
 	public function user()

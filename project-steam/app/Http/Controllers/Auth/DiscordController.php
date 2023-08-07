@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\GameAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -43,7 +44,7 @@ class DiscordController extends Controller
 		$refreshToken = $accessTokenResponse['refresh_token'];
 		$expires_at = now()->addSeconds($accessTokenResponse['expires_in']);
 
-		if (!$accessToken) return redirect('/');
+		if (!$accessToken) dd('No access token');
 
 		$discord = new \App\Helpers\DiscordAPI;
 
@@ -51,11 +52,12 @@ class DiscordController extends Controller
 
 		// Create/update user
 		$user = User::firstOrNew(['discord_id' => $discordUser['id']]);
-		if (!$user->exists) return redirect('/');
-
 		$user->setDiscordAccessToken($accessToken, $expires_at);
 		$user->setDiscordRefreshToken($refreshToken);
-
+		$user->save();
+		$gameAccount = GameAccount::firstOrNew(['user_id' => $user->id]);
+		$gameAccount->user_id = $user->id;
+		$gameAccount->save();
 		Auth::login($user);
 
 		return redirect('/dashboard');

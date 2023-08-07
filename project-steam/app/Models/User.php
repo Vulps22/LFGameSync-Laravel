@@ -84,6 +84,7 @@ class User extends Model implements AuthenticatableContract
 			$discordServer->user_id = $this->id;
 			$discordServer->name = $server['name'];
 			$discordServer->share_library = false;
+			$discordServer->icon_hash = $server['icon'];
 			$discordServer->save();
 		}
 
@@ -102,10 +103,17 @@ class User extends Model implements AuthenticatableContract
 		return $discord->getAvatar($this->discord_id, $this->discordUser()['avatar']);
 	}
 
+	public function linkedAccounts()
+	{
+		return $this->hasOne(GameAccount::class);
+	}
+
 	//get the steam user from the Steam API
 	public function steamUser()
 	{
 		$steam = new SteamAPI();
-		return $steam->getUser($this->steam_id);
+		$accounts = $this->linkedAccounts;
+
+		return $steam->getUser($accounts->steam_id);
 	}
 }
