@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{ App\View\Components\dashboard::syncDiscordServers() }}
+
 <div class="flex max-w-3xl mx-auto">
 
 	<div class="flex-1">

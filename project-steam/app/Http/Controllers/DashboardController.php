@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\DiscordServer;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
-    //
 
-    public function index() {
-        if(!auth()->check()) return redirect('/');
-        return view('dashboard');
-    }
+	public function index()
+	{
+		if (!auth()->check()) return redirect('/');
+		
+		$this->syncDiscordServers();
+
+		return view('dashboard');
+	}
+
+	public static function syncDiscordServers()
+	{
+		$user = User::find(auth()->user()->id);
+		if (!$user) {
+			return;
+		}
+
+		$user->syncDiscordServers();
+	}
 }

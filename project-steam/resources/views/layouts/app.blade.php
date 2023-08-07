@@ -13,7 +13,7 @@
 
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="antialiased">
+    <body class="antialiased bg-gray-900 text-white">
     @yield('content') 
   <footer>
     <!-- Footer content -->
