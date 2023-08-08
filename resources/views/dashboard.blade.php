@@ -7,58 +7,14 @@
 <div class="flex flex-col mx-52 mt-10">
 
 	<div class="mx-96 pb-20">
-		<div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 pb-10">
+		<div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 pb-10 px-10">
 			<h1 class="text-center text-2xl">Profiles</h1>
-			<div class="flex flex-row">
-				<div class="flex flex-col w-1/5 ml-20 border border-gray-700 rounded-lg">
-					<div class="mt-5 flex flex-col items-center">
+			<div class="grid grid-cols-2 gap-96">
 
-						<div class="flex-shrink-0">
-							<img src="{{ Auth()->user()->discordAvatar() }}" class="w-12 h-12 rounded-full">
-						</div>
+				<livewire:profile-card name="{{ Auth()->user()->discordUser()['username'] }}" avatar="{{ Auth()->user()->discordAvatar() }}" type="Discord" />
 
-						<div class="w-full items-center">
-							<h1 class="font-medium text-center">{{ Auth()->user()->discordUser()['username'] }}</h1>
-							<p class="w-full text-center text-sm text-gray-400">Discord</p>
-						</div>
-					</div>
+				<livewire:profile-card name="{{ Auth()->user()->steamUser()['personaname'] }}" avatar="{{ Auth()->user()->steamUser()['avatar'] }}" type="Steam" useGameAccounts="true" gameAccountId="{{ Auth()->user()->linkedAccounts->steam_id }}" />
 
-					<div class="mx-5 mb-5 flex flex-col">
-						<button class="w-full text-blue-500 border border-blue-500 px-4 py-2 rounded mt-4">Sync Servers</button>
-						<button class="btn border border-red-700 text-red-700 px-4 py-2 rounded mt-4">Logout</button>
-					</div>
-				</div>
-
-				<div class="flex flex-col w-1/5 mr-20 ml-auto border border-gray-700 rounded-lg">
-					<div class="mt-5 flex flex-col items-center">
-						<div class="flex-shrink-0">
-							@if (Auth::user()->linkedAccounts->steam_id)
-							<img src="{{ Auth::user()->steamUser()['avatar'] }}" class="w-12 h-12 rounded-full">
-							@else
-							<img src="{{ asset('img/steam_icon_logo.png') }}" class="w-12 h-12 rounded-full">
-							@endif
-						</div>
-
-						<div>
-							@if (Auth::user()->linkedAccounts->steam_id)
-							<h1 class="font-medium">{{ Auth()->user()->steamUser()['personaname'] }}</h1>
-							@else
-							<h1 class="font-medium">Not Linked</h1>
-							@endif
-							<p class="w-full text-center text-sm text-gray-400">Steam</p>
-
-						</div>
-					</div>
-
-					<div class="mx-5 mb-5 flex flex-col">
-						@if (Auth::user()->linkedAccounts->steam_id)
-						<button class="w-full border border-blue-500 text-blue-500 px-4 py-2 rounded mt-4">Sync Games</button>
-						<button class="btn border border-red-700 text-red-700 px-4 py-2 rounded mt-4">Logout</button>
-						@else
-						<a href="/link/steam" class=" mx-20 h-9 text-white px-4 py-2 rounded mt-4" style="background-image: url(' {{ asset('img/steam_01.png') }} '); background-size:cover;"></a>
-						@endif
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
