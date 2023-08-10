@@ -12,6 +12,11 @@ class DiscordServer extends Model
 		'server_id',
 		'name',
 		'icon_hash',
+		'share_library',
+	];
+
+	protected $casts = [
+		'share_library' => 'boolean',
 	];
 
 	public function user()

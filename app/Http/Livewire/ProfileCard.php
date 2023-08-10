@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\GameAccount;
 use Livewire\Component;
 
 class ProfileCard extends Component
@@ -13,11 +12,32 @@ class ProfileCard extends Component
 	public $type;
 	public $useGameAccounts = false;
 	public $gameAccountId = null;
+	public $gameCount = 0;
 
+
+	public function mount()
+	{
+		
+		if($this->type == 'Steam') {
+			$this->gameAccountId = Auth()->user()->linkedAccounts->steam_id;
+			if(!$this->gameAccountId) return;
+			
+			$this->useGameAccounts = true;
+			$steamUser = Auth()->user()->steamUser();
+			$this->name = $steamUser['personaname'];
+			$this->avatar = $steamUser['avatar'];
+			$this->gameCount = Auth()->user()->gameCount();
+		}
+
+		if($this->type == 'Discord') {
+			$discordUser = Auth()->user()->discordUser();
+			$this->name = $discordUser['username'];
+			$this->avatar = Auth()->user()->discordAvatar();
+		}
+	}
 
 	public function render()
 	{
-
 		switch ($this->type) {
 			case 'Steam':
 				return view($this->steamView());
@@ -27,9 +47,12 @@ class ProfileCard extends Component
 		}
 	}
 
-	public function syncServers()
+	public function syncGames()
 	{
-		$this->emit('syncServers');
+		Auth()->user()->syncGames($this->type);
+		$this->gameCount = Auth()->user()->gameCount();
+		
+
 	}
 
 	public function steamView()
