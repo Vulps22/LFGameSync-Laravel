@@ -21,7 +21,7 @@ class ProfileCard extends Component
 		if($this->type == 'Steam') {
 			$this->gameAccountId = Auth()->user()->linkedAccounts->steam_id;
 			if(!$this->gameAccountId) return;
-			
+
 			$this->useGameAccounts = true;
 			$steamUser = Auth()->user()->steamUser();
 			$this->name = $steamUser['personaname'];
