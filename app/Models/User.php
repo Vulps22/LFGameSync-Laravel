@@ -126,7 +126,7 @@ class User extends Model implements AuthenticatableContract
 
 		//add games to database
 
-		foreach($steamGames as $game) {
+		foreach ($steamGames as $game) {
 			$gameModel = Game::firstOrNew(['game_id' => $game['appid']]);
 			$gameModel->name = $game['name'];
 			$gameModel->image_url = $game['img_icon_url'];
@@ -140,15 +140,11 @@ class User extends Model implements AuthenticatableContract
 
 	public function games()
 	{
-
-		return $this->hasMany(GameUser::class)->with('game');
-		
+		return $this->belongsToMany(Game::class, 'game_users');
 	}
 
 	public function gameCount()
 	{
 		return $this->games()->count();
 	}
-
-
 }

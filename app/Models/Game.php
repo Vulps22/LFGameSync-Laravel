@@ -18,7 +18,7 @@ class Game extends Model
 	
 	public function users()
 	{
-		return $this->belongsToMany(User::class, 'user_games');
+		return $this->belongsToMany(User::class, 'game_users');
 	}
 
 	public function userCount()

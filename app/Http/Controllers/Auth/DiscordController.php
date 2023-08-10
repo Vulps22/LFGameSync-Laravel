@@ -52,6 +52,7 @@ class DiscordController extends Controller
 
 		// Create/update user
 		$user = User::firstOrNew(['discord_id' => $discordUser['id']]);
+		$user->discord_name = $discordUser['username'];
 		$user->setDiscordAccessToken($accessToken, $expires_at);
 		$user->setDiscordRefreshToken($refreshToken);
 		$user->save();
