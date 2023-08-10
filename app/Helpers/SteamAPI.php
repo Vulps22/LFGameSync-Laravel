@@ -20,6 +20,8 @@ class SteamAPI
         $query = http_build_query([
             'key' => $this->apiKey,
             'steamid' => $steamId,
+			'include_appinfo' => '1',
+			'include_played_free_games' => '1',
         ]);
 
         $ch = curl_init();
@@ -43,4 +45,13 @@ class SteamAPI
         $userData = $response->json()['response']['players'][0] ?? null;
         return $userData;
     }
+
+	public function getGame($id){
+		$response = Http::get("https://store.steampowered.com/api/appdetails/", [
+			'appids' => $id,
+		]);
+
+		$gameData = $response->json()[$id]['data'] ?? null;
+		return $gameData;
+	}
 }

@@ -25,15 +25,6 @@ class User extends Model implements AuthenticatableContract
 		'discord_token_expires' => 'timestamp'
 	];
 
-	public function getSteamIdAttribute($value)
-	{
-		return $value ?: $this->id;
-	}
-
-	public function getDiscordIdAttribute($value)
-	{
-		return $value ?: $this->id;
-	}
 
 	public function getDiscordAccessToken()
 	{
@@ -80,11 +71,13 @@ class User extends Model implements AuthenticatableContract
 
 		foreach ($servers as $server) {
 
-			$discordServer = DiscordServer::firstOrNew(['server_id' => $server['id']]);
+			$discordServer = DiscordServer::firstOrNew(['server_id' => $server['id'], 'user_id' => $this->id]);
 			$discordServer->user_id = $this->id;
 			$discordServer->name = $server['name'];
-			$discordServer->share_library = false;
 			$discordServer->icon_hash = $server['icon'];
+			if (!$discordServer->exists()) {
+				$discordServer->share_library = false;
+			}
 			$discordServer->save();
 		}
 
@@ -116,4 +109,46 @@ class User extends Model implements AuthenticatableContract
 
 		return $steam->getUser($accounts->steam_id);
 	}
+
+	public function syncGames($type)
+	{
+		switch ($type) {
+			case 'Steam':
+				$this->syncSteamGames();
+				break;
+		}
+	}
+
+	public function syncSteamGames()
+	{
+		$steam = new SteamAPI();
+		$steamGames = $steam->getPlayerOwnedGames($this->linkedAccounts->steam_id)['response']['games'];
+
+		//add games to database
+
+		foreach($steamGames as $game) {
+			$gameModel = Game::firstOrNew(['game_id' => $game['appid']]);
+			$gameModel->name = $game['name'];
+			$gameModel->image_url = $game['img_icon_url'];
+			$gameModel->save();
+
+			//add game to user
+			$gameUser = GameUser::firstOrNew(['user_id' => $this->id, 'game_id' => $gameModel->id]);
+			$gameUser->save();
+		}
+	}
+
+	public function games()
+	{
+
+		return $this->hasMany(GameUser::class)->with('game');
+		
+	}
+
+	public function gameCount()
+	{
+		return $this->games()->count();
+	}
+
+
 }

@@ -11,10 +11,12 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-
-		Schema::create('users', function (Blueprint $table) {
+		//create a migration for games storing the game name and the game id
+		Schema::create('games', function (Blueprint $table) {
 			$table->id();
-			$table->string('discord_id')->nullable()->unique();
+			$table->string('game_id');
+			$table->string('name');
+			$table->string('image_url');
 			$table->timestamps();
 		});
 	}
@@ -24,6 +26,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('users');
+		//
 	}
 };
