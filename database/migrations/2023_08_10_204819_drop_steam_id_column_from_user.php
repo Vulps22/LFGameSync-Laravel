@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('discord_servers', function (Blueprint $table) {
-            $table->boolean('share_library')->default(true);
-        });
+        Schema::table('users', function (Blueprint $table) {
+		$table->dropColumn('steam_id');
+	});
     }
 
     /**
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('discord_servers', function (Blueprint $table) {
+        Schema::table('user', function (Blueprint $table) {
             //
         });
     }
