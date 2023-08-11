@@ -22,5 +22,5 @@ jobs:
 
       - name: Deploy to Live Server
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no actions@ajmcallister.co.uk \
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no actions@161.97.68.166 \
             'cd /var/www/html/GameSync && sudo git pull'
