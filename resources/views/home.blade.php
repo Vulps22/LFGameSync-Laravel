@@ -14,7 +14,7 @@
 		</button>	</div>
 </header>
 
-<section id="features" class="bg-gray-800 py-20">
+<section id="features" class="bg-gray-800 py-20 px-10">
 	<div class="max-w-6xl mx-auto">
 		<h2 class="text-3xl text-white font-bold mb-16 text-center">Key Features</h2>
 
@@ -51,11 +51,11 @@
 		</div>
 </section>
 
-<section id="stats" class="bg-gray-950 py-20">
+<section id="stats" class="bg-gray-950 py-20 px-10">
 	<div class="max-w-6xl mx-auto">
 		<h2 class="text-3xl text-white font-bold mb-16 text-center">Connecting Players Worldwide!</h2>
 
-		<div class="grid grid-cols-1 md:grid-cols-2">
+		<div class="grid grid-cols-1 sm:grid-cols-2">
 
 			<!-- Feature cards... -->
 			<div class="flex items-center lg:pl-40">
@@ -67,9 +67,9 @@
 					<p class="text-gray-300">{{$playerCount}} gamers sharing their libraries</p>
 				</div>
 			</div>
-			<div class="flex items-center lg:pl-40">
+			<div class="flex items-center pt-10 sm:pt-0 lg:pl-40">
 				<div class="mr-4">
-					<i class="fa-solid fa-book text-5xl text-indigo-500"></i>
+					<i class="fa-brands fa-discord text-5xl text-indigo-500"></i>
 				</div>
 				<div>
 					<h3 class="text-gray-300 text-xl font-bold mb-2">Discord Servers</h3>
