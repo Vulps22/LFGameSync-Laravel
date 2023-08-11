@@ -20,26 +20,11 @@ jobs:
           known_hosts: ${{ secrets.SSH_HOST }}
           if_key_exists: replace
 
-      - name: Deploy to Live Server
+      - name: Deploy to Live Server and install
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no vulps@161.97.68.166
-
-      - name: pull changes
-        run: |
-          cd /var/www/html/GameSync && git pull
-
-      - name: Install Dependencies
-        run: |
-          composer install --optimize-autoloader --no-dev && npm install && npm run build
-        
-      - name: clear cache
-        run: |
-          php artisan config:clear && php artisan event:clear && php artisan route:clear && php artisan view:clear
-
-      - name: rebuild cache
-        run: |
-          php artisan config:cache && php artisan event:cache && php artisan route:cache && php artisan view:cache
-
-      - name: Migrate Database
-        run: |
-          php artisan migrate
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no vulps@161.97.68.166 \
+            'cd /var/www/html/GameSync && git pull' \
+            'composer install --optimize-autoloader --no-dev && npm install && npm run build' \
+            'php artisan config:clear && php artisan event:clear && php artisan route:clear && php artisan view:clear' \
+            'php artisan config:cache && php artisan event:cache && php artisan route:cache && php artisan view:cache' \
+            'php artisan migrate'
