@@ -18,6 +18,7 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_HOST }}
+          if_key_exists: replace
 
       - name: Deploy to Live Server
         run: |
