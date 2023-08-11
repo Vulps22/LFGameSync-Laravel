@@ -26,7 +26,7 @@ jobs:
 
       - name: pull changes
         run: |
-          cd /var/www/html/GameSync && git pull#
+          cd /var/www/html/GameSync && git pull
 
       - name: Install Dependencies
         run: |
