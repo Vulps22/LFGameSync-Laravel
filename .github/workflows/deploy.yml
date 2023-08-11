@@ -18,10 +18,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.LIVE_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa your-server-ip >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa ajmcallister.co.uk >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy to Live Server
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no user@your-server-ip \
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=actions@ajmcallister.co.uk \
             'cd /var/www/html/GameSync && sudo git pull'
