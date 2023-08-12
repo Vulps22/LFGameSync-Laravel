@@ -24,6 +24,6 @@
 		@else
 		<div class="px-4 py-2 mt-4">&nbsp;</div>
 		@endif
-		<button class="btn border border-red-700 text-red-700 px-4 py-2 rounded mt-4">{{ ($useGameAccounts ? 'Disconnect' : 'Logout') }}</button>
+		<button class="btn border border-red-700 text-red-700 px-4 py-2 rounded mt-4" wire:click="logout">{{ ($useGameAccounts ? 'Disconnect' : 'Logout') }}</button>
 	</div>
 </div>

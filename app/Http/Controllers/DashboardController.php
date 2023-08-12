@@ -11,9 +11,8 @@ class DashboardController extends Controller
 	public function index()
 	{
 		if (!auth()->check()) return redirect('/');
-		
+
 		$this->syncDiscordServers();
-		//auth()->user()->steamUser();
 		return view('dashboard');
 	}
 
@@ -25,5 +24,15 @@ class DashboardController extends Controller
 		}
 
 		$user->syncDiscordServers();
+	}
+
+	public function logout()
+	{
+		$user = User::find(auth()->user()->id);
+		if(!$user) return;
+		$user->logoutDiscord();
+		auth()->logout();
+		
+		return redirect('/');
 	}
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use \App\Helpers\DiscordAPI;
 use \App\Helpers\SteamAPI;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Cookie;
 
 class User extends Model implements AuthenticatableContract
 {
@@ -59,6 +60,7 @@ class User extends Model implements AuthenticatableContract
 	//get the user's discord user object from the Discord API
 	public function discordUser()
 	{
+		if(!$this->discord_access_token) return false;
 		$discord = new DiscordAPI();
 		return $discord->getUser($this->discord_access_token);
 	}
@@ -66,11 +68,11 @@ class User extends Model implements AuthenticatableContract
 	/**Get a list of the user's servers from discord. Each one should be a DiscordServer*/
 	public function syncDiscordServers()
 	{
+		if(!$this->discord_access_token) return redirect('/login/discord');
 		$discord = new DiscordAPI();
 		$servers = $discord->getGuilds($this->discord_access_token);
 
 		foreach ($servers as $server) {
-
 			$discordServer = DiscordServer::firstOrNew(['server_id' => $server['id'], 'user_id' => $this->id]);
 			$discordServer->user_id = $this->id;
 			$discordServer->name = $server['name'];
@@ -149,5 +151,14 @@ class User extends Model implements AuthenticatableContract
 	public function gameCount()
 	{
 		return $this->games()->count();
+	}
+
+	public function logoutDiscord(){
+		$this->discord_access_token = null;
+		$this->discord_refresh_token = null;
+		$this->discord_token_expires = null;
+		$this->save();
+		//queue the forget cookie
+		Cookie::queue(Cookie::forget('discord_token'));
 	}
 }

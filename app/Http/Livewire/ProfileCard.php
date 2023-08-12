@@ -31,8 +31,8 @@ class ProfileCard extends Component
 
 		if($this->type == 'Discord') {
 			$discordUser = Auth()->user()->discordUser();
-			$this->name = $discordUser['username'];
-			$this->avatar = Auth()->user()->discordAvatar();
+			$this->name = $discordUser['username'] ?? '';
+			$this->avatar = Auth()->user()->discordAvatar() ?? '';
 		}
 	}
 
@@ -61,6 +61,15 @@ class ProfileCard extends Component
 		if (!$this->gameAccountId) return 'livewire.steam-card';
 
 		return 'livewire.profile-card';
+
+	}
+
+	public function logout(){
+		if($this->type == 'Steam') return;
+		Auth()->user()->logoutDiscord();
+		Auth()->logout();
+		
+		return redirect('/');
 
 	}
 }
