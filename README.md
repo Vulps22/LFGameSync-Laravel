@@ -1,3 +1,25 @@
+# About This Project
+I started this project in an effort to learn to use Laravel for my career.
+
+The Final product will be a Discord Bot that allows server members to search for other members of the same server to play specific games.
+
+They will do this by using the /lfg command in discord and then seeing a list of members who own the game. They will then be able to choose as many of these members as they wish and the bot will create a post tagging them and notifying them that the user wishes to play the specified game.
+
+The project will be broken down into 2 repositories, At the time of writing only this portion of the project has been started.
+
+This is a Dashboard for the bot. It's purpose is to allow members to link their steam and discord accounts on the bot's database, and to also specify which servers they want to share their steam libraries on.
+
+The dashboard will be Responsive, Mobile-First, clean, and easy to use.
+
+Security will be taken into account, leveraging Discord's API to manage sign-in, and storing only the essential information on the database.
+
+The entire project should never ask for emails or passwords.
+The Dashboard will be built on Laravel, taking advantage of the blade system and the Livewire framework for interactive webpages.
+
+The project takes advantage of Github Actions for a continuous deployment pipeline that automatically connects to the live server and pulls changes from the main branch via SSH. The Action also runs a few scripts to install any new add-ons from composer and NPM, refresh the cache, and migrate any changes to the database.
+
+<hr>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
