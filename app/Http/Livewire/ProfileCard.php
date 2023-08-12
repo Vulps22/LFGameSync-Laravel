@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
+use App\Models\GameAccount;
+
 class ProfileCard extends Component
 {
 
@@ -17,10 +19,10 @@ class ProfileCard extends Component
 
 	public function mount()
 	{
-		
-		if($this->type == 'Steam') {
+
+		if ($this->type == 'Steam') {
 			$this->gameAccountId = Auth()->user()->linkedAccounts->steam_id;
-			if(!$this->gameAccountId) return;
+			if (!$this->gameAccountId) return;
 
 			$this->useGameAccounts = true;
 			$steamUser = Auth()->user()->steamUser();
@@ -29,7 +31,7 @@ class ProfileCard extends Component
 			$this->gameCount = Auth()->user()->gameCount();
 		}
 
-		if($this->type == 'Discord') {
+		if ($this->type == 'Discord') {
 			$discordUser = Auth()->user()->discordUser();
 			$this->name = $discordUser['username'] ?? '';
 			$this->avatar = Auth()->user()->discordAvatar() ?? '';
@@ -51,8 +53,6 @@ class ProfileCard extends Component
 	{
 		Auth()->user()->syncGames($this->type);
 		$this->gameCount = Auth()->user()->gameCount();
-		
-
 	}
 
 	public function steamView()
@@ -61,15 +61,22 @@ class ProfileCard extends Component
 		if (!$this->gameAccountId) return 'livewire.steam-card';
 
 		return 'livewire.profile-card';
-
 	}
 
-	public function logout(){
-		if($this->type == 'Steam') return;
-		Auth()->user()->logoutDiscord();
-		Auth()->logout();
-		
-		return redirect('/');
+	public function logout()
+	{
+		if ($this->type == 'Steam') {
+			$linkedAccount = GameAccount::where('user_id', Auth()->user()->id)->first();
+			$linkedAccount->steam_id = null;
+			$linkedAccount->save();
+			return redirect('/dashboard');
+		}
 
+		if ($this->type == 'Discord') {
+			Auth()->user()->logoutDiscord();
+			Auth()->logout();
+			return redirect('/');
+		}
+		
 	}
 }

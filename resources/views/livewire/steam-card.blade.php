@@ -11,6 +11,8 @@
 	</div>
 
 	<div class="mx-5 mb-5 flex flex-col">
-		<a href="/link/steam" class=" mx-20 h-9 text-white px-4 py-2 rounded mt-4" style="background-image: url(' {{ asset('img/steam_01.png') }} '); background-size:cover;"></a>
-	</div>
+    <a href="/link/steam" class="mx-auto h-9 text-white px-4 py-2 rounded mt-4">
+        <img src="{{ asset('img/steam_01.png') }}" alt="Sign in through Steam" style="max-width: 100%; height: auto;">
+    </a>
+</div>
 </div>

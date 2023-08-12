@@ -9,7 +9,7 @@
 	<div class="!mx-0 xl:mx-96 pb-20">
 		<div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 pb-10 px-10">
 			<h1 class="text-center text-2xl">Profiles</h1>
-			<div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-2 xl:gap-96 2xl:gap-[40rem]">
+			<div class="grid grid-cols-1 gap-5 lg:grid-cols-2 md:gap-2 xl:gap-96 2xl:gap-[40rem]">
 
 				<livewire:profile-card type="Discord"/>
 
