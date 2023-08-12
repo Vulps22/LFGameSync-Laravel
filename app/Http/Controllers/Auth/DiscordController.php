@@ -15,9 +15,9 @@ class DiscordController extends Controller
 
 	public function redirectToDiscord()
 	{
-		dd(env('DISCORD_CLIENT_ID') ?? 'No client ID');
+		
 		$params = [
-			'client_id' => env('DISCORD_CLIENT_ID'),
+			'client_id' => config('services.discord')['client_id'],
 			'redirect_uri' => route('discord.callback'),
 			'response_type' => 'code',
 			'scope' => 'identify guilds'
@@ -33,8 +33,8 @@ class DiscordController extends Controller
 
 		// Validate state parameter
 		$accessTokenResponse = Http::asForm()->post("https://discordapp.com/api/oauth2/token", [
-			'client_id' => env('DISCORD_CLIENT_ID'),
-			'client_secret' => env('DISCORD_CLIENT_SECRET'),
+			'client_id' => config('services.discord')['client_id'],
+			'client_secret' => config('services.discord')['client_secret'],
 			'redirect_uri' => route('discord.callback'),
 			'grant_type' => 'authorization_code',
 			'code' => $code,

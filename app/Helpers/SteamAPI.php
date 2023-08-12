@@ -11,7 +11,7 @@ class SteamAPI
 
     public function __construct()
     {
-        $this->apiKey = env('STEAM_API_KEY');
+        $this->apiKey = config('services.steam_api_key');
     }
 
     public function getPlayerOwnedGames($steamId)
@@ -38,7 +38,7 @@ class SteamAPI
     public function getUser($steamId)
     {
         $response = Http::get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/", [
-            'key' => env('STEAM_API_KEY'),
+            'key' => $this->apiKey,
             'steamids' => $steamId,
         ]);
 
