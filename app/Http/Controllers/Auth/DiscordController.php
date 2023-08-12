@@ -15,7 +15,7 @@ class DiscordController extends Controller
 
 	public function redirectToDiscord()
 	{
-
+		dd(env('DISCORD_CLIENT_ID') ?? 'No client ID');
 		$params = [
 			'client_id' => env('DISCORD_CLIENT_ID'),
 			'redirect_uri' => route('discord.callback'),
