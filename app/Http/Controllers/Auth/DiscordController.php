@@ -31,6 +31,8 @@ class DiscordController extends Controller
 
 		$code = $request->input('code');
 
+		if(!$code) return redirect('/');
+
 		// Validate state parameter
 		$accessTokenResponse = Http::asForm()->post("https://discordapp.com/api/oauth2/token", [
 			'client_id' => config('services.discord')['client_id'],
