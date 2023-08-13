@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Cookie;
 class DiscordController extends Controller
 {
 
-	private $logCache = [];
-
-	public function redirectToDiscord()
+	public function doLogin()
 	{
 
 		if (Auth::check()) return redirect('/dashboard');
-		//if user has the cookie and it's not expired, log them in
+
+		//if user has the cookie try to log them in
 		$discordToken = Cookie::get('discord_token');
 
 		if ($discordToken) {
@@ -30,10 +29,14 @@ class DiscordController extends Controller
 			Cookie::queue(Cookie::forget('discord_token'));
 			$response = redirect('/');
 			return $response;
-		}
+		} else return $this->redirectToDiscord();
+	}
 
+	public function redirectToDiscord()
+	{
 		return redirect(DiscordAPI::getAuthURL());
 	}
+
 
 	public function handleDiscordCallback(Request $request)
 	{

@@ -24,8 +24,8 @@ Route::get('/link/steam/callback', [SteamController::class, 'handleSteamCallback
 
 // routes/web.php
 
-Route::get('/login/discord', [DiscordController::class, 'redirectToDiscord']);
-Route::get('/login/discord/callback', [DiscordController::class, 'handleDiscordCallback'])->name('discord.callback');
+Route::get('/login', [DiscordController::class, 'doLogin'])->name('discord.login');
+Route::get('/login/callback', [DiscordController::class, 'handleDiscordCallback'])->name('discord.callback');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

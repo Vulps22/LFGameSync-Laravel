@@ -68,7 +68,7 @@ class User extends Model implements AuthenticatableContract
 	/**Get a list of the user's servers from discord. Each one should be a DiscordServer*/
 	public function syncDiscordServers()
 	{
-		if(!$this->discord_access_token) return redirect('/login/discord');
+		if(!$this->discord_access_token) return redirect('/login');
 		$discord = new DiscordAPI();
 		$servers = $discord->getGuilds($this->discord_access_token);
 

@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
 	{
-		if(Cookie::get('discord_token')) return redirect('/login/discord');
+		if(Cookie::get('discord_token')) return redirect('/login');
 		
 		//count how many servers have share_library enabled by at least one user
 		$discordCount = DiscordServer::whereHas('user', function ($query) {
