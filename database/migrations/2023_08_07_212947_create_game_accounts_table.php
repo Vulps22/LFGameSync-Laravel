@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('game_accounts', function (Blueprint $table) {
             $table->id();
 			$table->foreignId('user_id')->constrained()->onDelete('cascade');
-			$table->string('steam_id')->unique();
+			$table->string('steam_id')->nullable()->unique();
             $table->timestamps();
         });
     }

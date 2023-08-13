@@ -5,28 +5,37 @@ namespace App\Models;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-
 use \App\Helpers\DiscordAPI;
 use \App\Helpers\SteamAPI;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cookie;
 
 class User extends Model implements AuthenticatableContract
 {
-
+	use HasFactory;
 	use Authenticatable;
+
 	protected $fillable = [
-		'steam_id',
 		'discord_id'
 	];
 
 	protected $casts = [
-		'steam_id' => 'string',
 		'discord_id' => 'string',
 		'discord_token_expires' => 'timestamp'
 	];
 
+	public static function boot()
+	{
+		parent::boot();
 
+		static::created(function ($model) {
+			static::createLinkedAccount($model);
+		});
+	}
+
+
+	// Authentication and Tokens
 	public function getDiscordAccessToken()
 	{
 		return $this->discord_access_token;
@@ -36,7 +45,6 @@ class User extends Model implements AuthenticatableContract
 	{
 		$this->discord_access_token = $accessToken;
 		$this->discord_token_expires = $expires;
-
 		$this->save();
 	}
 
@@ -48,7 +56,6 @@ class User extends Model implements AuthenticatableContract
 	public function setDiscordRefreshToken($refreshToken)
 	{
 		$this->discord_refresh_token = $refreshToken;
-
 		$this->save();
 	}
 
@@ -57,18 +64,26 @@ class User extends Model implements AuthenticatableContract
 		return $this->discord_token_expires;
 	}
 
-	//get the user's discord user object from the Discord API
+	public function logoutDiscord()
+	{
+		$this->discord_access_token = null;
+		$this->discord_refresh_token = null;
+		$this->discord_token_expires = null;
+		$this->save();
+		Cookie::queue(Cookie::forget('discord_token'));
+	}
+
+	// Discord Related Methods
 	public function discordUser()
 	{
-		if(!$this->discord_access_token) return false;
+		if (!$this->discord_access_token) return false;
 		$discord = new DiscordAPI();
 		return $discord->getUser($this->discord_access_token);
 	}
 
-	/**Get a list of the user's servers from discord. Each one should be a DiscordServer*/
 	public function syncDiscordServers()
 	{
-		if(!$this->discord_access_token) return redirect('/login');
+		if (!$this->discord_access_token) return redirect('/login');
 		$discord = new DiscordAPI();
 		$servers = $discord->getGuilds($this->discord_access_token);
 
@@ -83,13 +98,7 @@ class User extends Model implements AuthenticatableContract
 			$discordServer->save();
 		}
 
-		//remove discord servers that the user is no longer a member of
 		$this->discordServers()->whereNotIn('server_id', array_column($servers, 'id'))->delete();
-	}
-
-	public function discordServers(): HasMany
-	{
-		return $this->hasMany(DiscordServer::class);
 	}
 
 	public function discordAvatar()
@@ -98,17 +107,24 @@ class User extends Model implements AuthenticatableContract
 		return $discord->getAvatar($this->discord_id, $this->discordUser()['avatar']);
 	}
 
+	// Linked Accounts
 	public function linkedAccounts()
 	{
-		return $this->hasOne(GameAccount::class);
+		return $this->hasOne(GameAccount::class) ?: [];
 	}
 
-	//get the steam user from the Steam API
+	private static function createLinkedAccount($model)
+	{
+		$linkedAccount = new GameAccount();
+		$linkedAccount->user_id = $model->id;
+		$linkedAccount->save();
+	}
+
+	// Steam Related Methods
 	public function steamUser()
 	{
 		$steam = new SteamAPI();
 		$accounts = $this->linkedAccounts;
-
 		return $steam->getUser($accounts->steam_id);
 	}
 
@@ -118,6 +134,7 @@ class User extends Model implements AuthenticatableContract
 			case 'Steam':
 				$this->syncSteamGames();
 				break;
+				// Add more cases for other platforms if needed
 		}
 	}
 
@@ -125,11 +142,10 @@ class User extends Model implements AuthenticatableContract
 	{
 		$steam = new SteamAPI();
 		$steamGames = $steam->getPlayerOwnedGames($this->linkedAccounts->steam_id)['response'];
-		if(!array_key_exists('games', $steamGames)){
+		if (!array_key_exists('games', $steamGames)) {
 			return;
 		}
 		$steamGames = $steamGames['games'];
-		//add games to database
 
 		foreach ($steamGames as $game) {
 			$gameModel = Game::firstOrNew(['game_id' => $game['appid']]);
@@ -137,10 +153,15 @@ class User extends Model implements AuthenticatableContract
 			$gameModel->image_url = $game['img_icon_url'];
 			$gameModel->save();
 
-			//add game to user
 			$gameUser = GameUser::firstOrNew(['user_id' => $this->id, 'game_id' => $gameModel->id]);
 			$gameUser->save();
 		}
+	}
+
+	// Relationships
+	public function discordServers(): HasMany
+	{
+		return $this->hasMany(DiscordServer::class);
 	}
 
 	public function games()
@@ -148,17 +169,9 @@ class User extends Model implements AuthenticatableContract
 		return $this->belongsToMany(Game::class, 'game_users');
 	}
 
+	// Miscellaneous Methods
 	public function gameCount()
 	{
 		return $this->games()->count();
-	}
-
-	public function logoutDiscord(){
-		$this->discord_access_token = null;
-		$this->discord_refresh_token = null;
-		$this->discord_token_expires = null;
-		$this->save();
-		//queue the forget cookie
-		Cookie::queue(Cookie::forget('discord_token'));
 	}
 }

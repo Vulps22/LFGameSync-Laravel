@@ -16,16 +16,16 @@ class DiscordController extends Controller
 
 	public function doLogin()
 	{
-
+		//check if user is already logged in
 		if (Auth::check()) return redirect('/dashboard');
-
+		
 		//if user has the cookie try to log them in
 		$discordToken = Cookie::get('discord_token');
-
 		if ($discordToken) {
 			if ($this->cookieLogin()) {
 				return redirect('/dashboard');
 			}
+
 			Cookie::queue(Cookie::forget('discord_token'));
 			$response = redirect('/');
 			return $response;
@@ -58,7 +58,9 @@ class DiscordController extends Controller
 		$user = $this->validateToken($accessToken, $refreshToken, $expires_at);
 
 		if ($user) {
+
 			Cookie::queue('discord_token', $accessToken, $accessTokenResponse['expires_in']);
+
 			return redirect('/dashboard');
 		} else {
 			return redirect('/');
@@ -68,7 +70,6 @@ class DiscordController extends Controller
 	private function validateToken($accessToken, $refreshToken = null, $expires_at = null)
 	{
 		$discordUser = DiscordAPI::getUser($accessToken);
-
 		if (!$discordUser) {
 			return false;
 		}
@@ -82,10 +83,6 @@ class DiscordController extends Controller
 		}
 
 		$user->save();
-
-		$gameAccount = GameAccount::firstOrNew(['user_id' => $user->id]);
-		$gameAccount->user_id = $user->id;
-		$gameAccount->save();
 
 		Auth::login($user);
 
@@ -105,13 +102,10 @@ class DiscordController extends Controller
 		$user = User::where('discord_access_token', $discordToken)->first();
 
 		if (!$user) return false;
-
 		//if the token has expired, redirect them home
 		if (!$user->discord_token_expires_at < now()) {
 			return false;
 		}
-
-		if (!$user) return false;
 		return $this->refreshToken($user);
 	}
 
@@ -125,7 +119,6 @@ class DiscordController extends Controller
 	{
 		$refreshToken = $user->discord_refresh_token;
 		$accessTokenResponse = DiscordAPI::refreshToken($refreshToken);
-
 		if (!$accessTokenResponse) {
 			$user->setDiscordAccessToken(null, null);
 			$user->setDiscordRefreshToken(null);
@@ -141,6 +134,7 @@ class DiscordController extends Controller
 		$user->setDiscordRefreshToken($refreshToken);
 		$user->save();
 		Auth::login($user);
+		Cookie::queue('discord_token', $accessToken, $accessTokenResponse['expires_in']); //THIS is why testing is important! I mised this and would never have noticed without testing!
 		return true;
 	}
 }

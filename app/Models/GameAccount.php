@@ -9,6 +9,7 @@ class GameAccount extends Model
 {
     use HasFactory;
 	protected $fillable = [
+		'user_id',
 		'steam_id',
 	];
 }

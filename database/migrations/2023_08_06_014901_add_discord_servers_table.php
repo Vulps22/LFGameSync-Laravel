@@ -6,25 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('discord_servers', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->string('server_id');
-            $table->string('name');
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('discord_servers', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('user_id');
+			$table->string('server_id');
+			$table->string('name');
+			$table->boolean('share_library')->default(true);
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('discord_sharing_servers');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('discord_servers');
+	}
 };

@@ -53,7 +53,6 @@ class DiscordAPI
         $response = Http::asForm()->post('https://discord.com/api/oauth2/token', $data);
 
         if ($response->successful()) {
-			dd($response->json());
             return $response->json();
         } else {
             return null; // Handle error cases here
