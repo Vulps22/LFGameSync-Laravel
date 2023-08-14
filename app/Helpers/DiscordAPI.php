@@ -9,7 +9,7 @@ class DiscordAPI
 	public static function getAuthURL(){
 		$params = [
 			'client_id' => config('services.discord')['client_id'],
-			'redirect_uri' => route('discord.callback')."aaaaa",
+			'redirect_uri' => route('discord.callback'),
 			'response_type' => 'code',
 			'scope' => 'identify guilds'
 		];
