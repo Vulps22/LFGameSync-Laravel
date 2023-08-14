@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/lfg/findFor', [App\Http\Controllers\LFGController::class, 'findFor'])->name('lfg.findFor');
+Route::get('/lfg/find', [App\Http\Controllers\LFGController::class, 'find'])->name('lfg.find');
