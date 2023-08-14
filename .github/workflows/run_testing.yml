@@ -27,7 +27,7 @@ jobs:
     - name: Install Dependencies
       run: composer install
     - name: build Vite
-      run: npm install && npm run dev
+      run: npm install && npm run build
     - name: Generate key
       run: php artisan key:generate
     - name: Directory Permissions
