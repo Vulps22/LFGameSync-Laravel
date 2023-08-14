@@ -37,4 +37,6 @@ jobs:
     - name: Execute migrations via Artisan
       run: php artisan migrate:install && php artisan migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
       run: vendor/bin/phpunit
