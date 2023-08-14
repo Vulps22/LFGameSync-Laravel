@@ -16,7 +16,8 @@ return new class extends Migration
 			$table->foreignId('user_id');
 			$table->string('server_id');
 			$table->string('name');
-			$table->boolean('share_library')->default(true);
+			$table->string('icon_hash')->nullable();
+			$table->boolean('share_library')->default(false);
 			$table->timestamps();
 		});
 	}
