@@ -12,10 +12,12 @@ use Illuminate\Http\Request;
 
 class LFGController extends Controller
 {
-	public function findFor(Request $request)
+	/**
+	 * Find users who own a game
+	 */
+	public function find(Request $request)
 	{
 		$gameName = $request->input('game');
-		$discord_id = $request->input('discord');
 		$server_id = $request->input('server');
 		if (!$gameName) return "No game name provided";
 		$game = Game::where('name', $gameName)->first();
@@ -33,7 +35,6 @@ class LFGController extends Controller
 			->where('discord_servers.server_id', $server_id)
 			->where('discord_servers.share_library', 1)
 			->get();
-
 
 		return LFGResource::collection($users);
 	}
