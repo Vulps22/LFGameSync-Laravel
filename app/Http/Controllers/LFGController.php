@@ -26,7 +26,7 @@ class LFGController extends Controller
 		$server = DiscordServer::where('server_id', $server_id)->first();
 		if (!$server) return "Server not found";
 
-		$users = User::select('users.id', 'users.discord_name, users.discord_id')
+		$users = User::select('users.id', 'users.discord_name', 'users.discord_id')
 			->join('game_accounts', 'users.id', '=', 'game_accounts.user_id')
 			->join('game_users', 'users.id', '=', 'game_users.user_id')
 			->join('discord_servers', 'users.id', '=', 'discord_servers.user_id')

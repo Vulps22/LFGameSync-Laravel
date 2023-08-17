@@ -19,9 +19,9 @@ class LFGControllerTest extends TestCase
 	{
 		// Create a game and users with matching game and server
 		$game = Game::factory()->create(['name' => 'Overwatch']);
-		$user1 = User::factory()->create(['discord_name' => 'User1']);
-		$user2 = User::factory()->create(['discord_name' => 'User2']);
-		$user3 = User::factory()->create(['discord_name' => 'User3']);
+		$user1 = User::factory()->create(['discord_name' => 'User1', 'discord_id' => '123']);
+		$user2 = User::factory()->create(['discord_name' => 'User2', 'discord_id' => '456']);
+		$user3 = User::factory()->create(['discord_name' => 'User3', 'discord_id' => '789']);
 		GameUser::factory()->create(['user_id' => $user1->id, 'game_id' => $game->id]);
 		GameUser::factory()->create(['user_id' => $user2->id, 'game_id' => $game->id]);
 		GameUser::factory()->create(['user_id' => $user3->id, 'game_id' => $game->id]);
@@ -38,6 +38,7 @@ class LFGControllerTest extends TestCase
 		$response->assertStatus(200);
 		$response->assertJsonCount(1);
 		$response->assertJsonFragment(['discord_name' => 'User1']);
+		$response->assertJsonFragment(['discord_id' => '123']);
 	}
 
 	public function testFindReturnsErrorIfGameNotFound()
