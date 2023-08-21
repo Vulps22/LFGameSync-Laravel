@@ -8,18 +8,23 @@ use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
-    public function index()
+	public function index()
 	{
-		if(Cookie::get('discord_token')) return redirect('/login');
-		
+		if (Cookie::get('discord_token')) return redirect('/login');
+
 		//count how many servers are in the database
 		$discordCount = DiscordServer::count();
-		
+
 
 		return view('home', [
 			'user' => auth()->user(),
 			'discordCount' => $discordCount,
 			'playerCount' => User::count()
 		]);
+	}
+
+	public function privacy()
+	{
+		return view('privacy');
 	}
 }

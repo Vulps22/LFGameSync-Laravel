@@ -19,10 +19,13 @@ class LFGController extends Controller
 	public function find(Request $request)
 	{
 		$gameName = $request->input('game');
+		if (!$gameName) return "No game name provided";
+
 		$user_id = $request->input('user_id'); //the user's discord ID
 		if(!$user_id) return "No user ID provided";
+
 		$server_id = $request->input('server');
-		if (!$gameName) return "No game name provided";
+		
 		$game = Game::where('name', $gameName)->first();
 		if (!$game) return "Game not found";
 
