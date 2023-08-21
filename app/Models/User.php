@@ -87,18 +87,28 @@ class User extends Model implements AuthenticatableContract
 		$discord = new DiscordAPI();
 		$servers = $discord->getGuilds($this->discord_access_token);
 
+		//set should_delete to true for all servers the user is in
+		$this->discordServers()->update(['should_delete' => true]);
+
+
 		foreach ($servers as $server) {
-			$discordServer = DiscordServer::firstOrNew(['server_id' => $server['id'], 'user_id' => $this->id]);
-			$discordServer->user_id = $this->id;
-			$discordServer->name = $server['name'];
-			$discordServer->icon_hash = $server['icon'];
-			if (!$discordServer->exists()) {
-				$discordServer->share_library = false;
+			//if the server exists add a discord_server_user record
+			$discordServer = DiscordServer::where(['discord_id' => $server['id']])->first();
+			if(!$discordServer) continue;
+
+			$serverUser = DiscordServerUser::firstOrNew(['server_id' => $discordServer->id, 'user_id' => $this->id]);
+			if(!$serverUser->exists) {
+				$serverUser->share_library = false;
 			}
-			$discordServer->save();
+
+			//this server exists so we don't want to delete it
+			$serverUser->should_delete = false;
+			$serverUser->save();
+			
 		}
 
-		$this->discordServers()->whereNotIn('server_id', array_column($servers, 'id'))->delete();
+		//delete all servers that should be deleted
+		$this->discordServers()->where('should_delete', true)->delete();
 	}
 
 	public function discordAvatar()
@@ -161,7 +171,7 @@ class User extends Model implements AuthenticatableContract
 	// Relationships
 	public function discordServers(): HasMany
 	{
-		return $this->hasMany(DiscordServer::class);
+		return $this->hasMany(DiscordServerUser::class);
 	}
 
 	public function games()

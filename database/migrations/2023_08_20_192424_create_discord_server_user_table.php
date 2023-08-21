@@ -11,11 +11,12 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('discord_servers', function (Blueprint $table) {
+		Schema::create('discord_server_users', function (Blueprint $table) {
 			$table->id();
-			$table->string('discord_id');
-			$table->string('name');
-			$table->string('icon_hash')->nullable();
+			$table->string('server_id');
+			$table->string('user_id');
+			$table->boolean('share_library')->default(false);
+			$table->boolean('should_delete')->default(false);
 			$table->timestamps();
 		});
 	}
@@ -25,6 +26,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('discord_servers');
+		Schema::dropIfExists('discord_server_user');
 	}
 };

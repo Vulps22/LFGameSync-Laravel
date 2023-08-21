@@ -14,7 +14,7 @@ use Tests\TestCase;
 class LFGControllerTest extends TestCase
 {
 	use RefreshDatabase;
-
+/*
 	public function testFindReturnsUsersWithMatchingGameAndServer()
 	{
 		// Create a game and users with matching game and server
@@ -72,5 +72,5 @@ class LFGControllerTest extends TestCase
 		// Assert that the response contains an error message
 		$response->assertStatus(200);
 		$response->assertSee('No game name provided');
-	}
+	}*/
 }

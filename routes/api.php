@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/lfg/find', [App\Http\Controllers\LFGController::class, 'find'])->name('lfg.find');
+Route::post('/lfg/register_server', [App\Http\Controllers\LFGController::class, 'register_server'])->name('lfg.register_server');
