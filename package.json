@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-		"start": "vite && php artisan serve",
+		"start": "php artisan serve && npm run dev",
 		"test": "php artisan test",
         "dev": "vite",
         "build": "vite build"
