@@ -18,6 +18,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 
 Route::get('/link/steam', [SteamController::class, 'redirectToSteam'])->name('steam.login');
 Route::get('/link/steam/callback', [SteamController::class, 'handleSteamCallback'])->name('steam.callback');
