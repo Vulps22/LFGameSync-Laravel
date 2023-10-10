@@ -8,10 +8,16 @@
 	<div class="max-w-3xl mx-auto text-center">
 		<h1 class="text-3xl font-bold">Meet Gamers. Make Friends.</h1>
 		<p class="text-xl mt-4">Connect your gaming profiles and find new squadmates today!</p>
-		<button class="bg-white text-indigo-500 px-6 py-3 rounded-full mt-8" onclick="window.location.href='/login'">
+		<button style="width:14rem" class="bg-white text-indigo-500 px-6 py-3 rounded-full mt-8 sm:mr-4" onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=1137177567745548318&permissions=0&scope=bot'">
+			<i class="fa-solid fa-robot"></i>
+			Get the Bot
+		</button>
+		<button style="width:14rem" class="bg-white text-indigo-500 px-6 py-3 rounded-full mt-8" onclick="window.location.href='/login'">
 			<i class="fa-brands fa-discord"></i>
 			Sign In with Discord
-		</button>	</div>
+		</button>
+		
+	</div>
 </header>
 
 <section id="features" class="bg-gray-800 py-20 px-10">
