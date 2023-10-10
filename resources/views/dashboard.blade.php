@@ -28,14 +28,14 @@
 			Get the Bot
 		</button>
 	</div>
-</div>
-<div class="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-	@foreach($discordServers as $server)
-	<livewire:server-card :server="$server" :share_library="$server['share_library']" />
-	@endforeach
-</div>
 
-</details>
+	<div class="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+		@foreach($discordServers as $server)
+		<livewire:server-card :server="$server" :share_library="$server['share_library']" />
+		@endforeach
+	</div>
+
+	</details>
 
 </div>
 
