@@ -18,30 +18,30 @@ class LFGController extends Controller
 	 */
 	public function find(Request $request)
 	{
-		echo "1";
+
 		$gameName = $request->input('game');
 		if (!$gameName) return "No game name provided";
-echo "2";
+
 		$user_id = $request->input('user_id'); //the user's discord ID
 		if(!$user_id) return "No user ID provided";
-echo "3";
+
 		$server_id = $request->input('server');
-		echo "4";
+
 		$game = Game::where('name', $gameName)->first();
 		if (!$game) return "Game not found";
-echo "5";
+
 		$user = User::where('discord_id', $user_id)->first();
 		if (!$user) return "User not found";
-echo "6";
+
 		$server = DiscordServer::where('discord_id', $server_id)->first();
 		if (!$server) return "Server not found";
-echo "7";
+
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->first();
 		if(!$discordServerUser) return "Server User not Registered";
-echo "8";
+
 		//if the user is not sharing their library with this server
 		if (!$discordServerUser->share_library) return "Not Sharing";
-echo "9";
+
 		$users = User::select('users.id', 'users.discord_name', 'users.discord_id')
 			->join('game_accounts', 'users.id', '=', 'game_accounts.user_id')
 			->join('game_users', 'users.id', '=', 'game_users.user_id')
@@ -52,8 +52,7 @@ echo "9";
 			->where('discord_servers.id', $server_id)
 			->where('discord_server_users.share_library', 1)
 			->get() ?? [];
-echo "10";
-dd($users);
+
 		return LFGResource::collection($users);
 	}
 
