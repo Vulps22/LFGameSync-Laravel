@@ -83,7 +83,7 @@ class LFGController extends Controller
 	public function remove_server(Request $request)
 	{
 		$server_id = $request->input('server_id');
-		$server = DiscordServer::find(['discord_id' => $server_id]);
+		$server = DiscordServer::first(['discord_id' => $server_id]);
 		if(!$server) return "Nothing to remove";
 var_dump($server);
 exit;
