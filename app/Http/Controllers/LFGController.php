@@ -53,7 +53,7 @@ echo "9";
 			->where('discord_server_users.share_library', 1)
 			->get() ?? [];
 echo "10";
-ds($users);
+dd($users);
 		return LFGResource::collection($users);
 	}
 
