@@ -36,6 +36,7 @@ class LFGController extends Controller
 		if (!$server) return "Server not found";
 
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->first();
+		if(!$discordServerUser) return "Server User not Registered";
 
 		//if the user is not sharing their library with this server
 		if (!$discordServerUser->share_library) return "Not Sharing";
@@ -49,7 +50,7 @@ class LFGController extends Controller
 			->where('games.id', $game->id)
 			->where('discord_servers.id', $server_id)
 			->where('discord_server_users.share_library', 1)
-			->get();
+			->get() ?? [];
 
 		return LFGResource::collection($users);
 	}

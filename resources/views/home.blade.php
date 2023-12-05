@@ -4,7 +4,7 @@
 
 @section('content')
 
-<header class="bg-gray-900 text-white px-4 py-32">
+<header class="bg-gray-900 text-white px-4 pb-20 pt-10">
 	<div class="max-w-3xl mx-auto text-center">
 		<h1 class="text-3xl font-bold">Meet Gamers. Make Friends.</h1>
 		<p class="text-xl mt-4">Connect your gaming profiles and find new squadmates today!</p>
