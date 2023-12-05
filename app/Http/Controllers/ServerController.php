@@ -34,6 +34,8 @@ class ServerController extends Controller
 		if (!$discordServerUser) return "Server User not Registered";
 
         $discordServerUser->share_library = $state;
-        return "Sharing Set";
+        $discordServerUser->save();
+
+        return "Sharing Set to $state";
     }
 }
