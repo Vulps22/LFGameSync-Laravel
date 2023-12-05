@@ -17,7 +17,10 @@ class ServerController extends Controller
         if(!$user_id) return "No User ID Provided";
         
         $state = $request->input('state');
-        if(!is_bool($state)) return "State must be a Boolean";
+        if(!($state === "true" || $state === "false")) return "State must be a Boolean";
+        
+        if($state === "true") $state = true;
+        else $state = false;
 
         $user = User::where('discord_id', $user_id)->first();
 		if (!$user) return "User not found";
