@@ -25,6 +25,8 @@ class ServerController extends Controller
         $user = User::where('discord_id', $user_id)->first();
 		if (!$user) return "User not found";
 
+        $user->syncDiscordServers();
+
         $server = DiscordServer::where('discord_id', $server_id)->first();
 		if (!$server) return "Server not found";
 
