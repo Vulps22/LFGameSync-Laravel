@@ -168,6 +168,13 @@ class User extends Model implements AuthenticatableContract
 		}
 	}
 
+	public function unlinkSteamGames(){
+		$games = GameUser::where('user_id', $this->id)->get();
+		foreach($games as $game){
+			$game->delete();
+		}
+	}
+
 	// Relationships
 	public function discordServers(): HasMany
 	{

@@ -66,6 +66,7 @@ class ProfileCard extends Component
 	public function logout()
 	{
 		if ($this->type == 'Steam') {
+			Auth()->user()->unlinkSteamGames();
 			$linkedAccount = GameAccount::where('user_id', Auth()->user()->id)->first();
 			$linkedAccount->steam_id = null;
 			$linkedAccount->save();
