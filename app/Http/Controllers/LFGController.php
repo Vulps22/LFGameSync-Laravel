@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Game;
 use App\Models\DiscordServer;
 use App\Models\DiscordServerUser;
-
+use Exception;
 use Illuminate\Http\Request;
 
 class LFGController extends Controller
@@ -82,16 +82,24 @@ class LFGController extends Controller
 	 */
 	public function remove_server(Request $request)
 	{
-		$server_id = $request->input('server_id');
-		$server = DiscordServer::where('discord_id', $server_id)->first();
-		if(!$server) return "Nothing to remove";
-		
-		$id = $server->id;
-echo $id;
-		$users = DiscordServerUser::where('server_id', $id)->get();
+		try {
+			$server_id = $request->input('server_id');
+			$server = DiscordServer::where('discord_id', $server_id)->first();
+			if (!$server) return "Nothing to remove";
 
-		var_dump($users);
+			$id = $server->id;
 
-		//$server->delete()
+			$users = DiscordServerUser::where('server_id', $id)->get();
+
+			foreach ($users as $user) {
+				$user->delete();
+			}
+
+			$server->delete();
+
+			return "Server Removed Successfully";
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 }
