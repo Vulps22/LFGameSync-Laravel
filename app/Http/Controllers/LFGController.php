@@ -23,7 +23,7 @@ class LFGController extends Controller
 		if (!$gameName) return "No game name provided";
 
 		$user_id = $request->input('user_id'); //the user's discord ID
-		if(!$user_id) return "No user ID provided";
+		if (!$user_id) return "No user ID provided";
 
 		$server_id = $request->input('server');
 
@@ -37,7 +37,7 @@ class LFGController extends Controller
 		if (!$server) return "Server not found";
 
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->first();
-		if(!$discordServerUser) return "Server User not Registered";
+		if (!$discordServerUser) return "Server User not Registered";
 
 		//if the user is not sharing their library with this server
 		if (!$discordServerUser->share_library) return "Not Sharing";
@@ -74,5 +74,24 @@ class LFGController extends Controller
 		$server->save();
 
 		return $server->id;
+	}
+
+	/**
+	 * Remove Server from list
+	 * remove server from user
+	 */
+	public function remove_server(Request $request)
+	{
+		$server_id = $request->input('server_id');
+		$server = DiscordServer::find(['discord_id' => $server_id]);
+		if(!$server) return "Nothing to remove";
+
+		$id = $server->id;
+echo $id;
+		$users = DiscordServerUser::whereHas('server_id', $id)->get();
+
+		var_dump($users);
+
+		//$server->delete()
 	}
 }
