@@ -29,8 +29,6 @@ class LFGController extends Controller
 		$game = Game::where('name', $gameName)->first();
 		if (!$game) return "Game not found";
 
-		echo "Game: " . $game->id;
-
 		$user = User::where('discord_id', $user_id)->first();
 		if (!$user) return "User not found";
 
@@ -38,8 +36,7 @@ class LFGController extends Controller
 
 		$server = DiscordServer::where('discord_id', $server_id)->first();
 		if (!$server) return "Server not found";
-		var_dump($server_id);
-		var_dump($server->id);
+
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->first();
 		if (!$discordServerUser) return "Server User not Registered";
 
@@ -56,7 +53,7 @@ class LFGController extends Controller
 			->where('discord_servers.id', $server->id)
 			->where('discord_server_users.share_library', 1)
 			->get() ?? [];
-		var_dump($users);
+
 		return LFGResource::collection($users);
 	}
 
