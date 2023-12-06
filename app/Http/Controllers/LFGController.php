@@ -38,7 +38,8 @@ class LFGController extends Controller
 
 		$server = DiscordServer::where('discord_id', $server_id)->first();
 		if (!$server) return "Server not found";
-
+		var_dump($server_id);
+		var_dump($server->id);
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->first();
 		if (!$discordServerUser) return "Server User not Registered";
 
