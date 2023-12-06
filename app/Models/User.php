@@ -159,6 +159,7 @@ class User extends Model implements AuthenticatableContract
 	public function syncSteamGames()
 	{
 		if(!$this->linkedAccounts->steam_id) return;
+		var_dump($this->linkedAccounts->steam_id);
 		$steam = new SteamAPI();
 		$steamGames = $steam->getPlayerOwnedGames($this->linkedAccounts->steam_id)['response'];
 		if (!$steamGames || !array_key_exists('games', $steamGames)) {
