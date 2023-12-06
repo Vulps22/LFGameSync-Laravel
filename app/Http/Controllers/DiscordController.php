@@ -10,7 +10,8 @@ class DiscordController extends Controller
         echo "rename channel $channelId";
         // Replace 'your_bot_token' with your actual bot token
         $botToken = env("BOT_TOKEN");
-        echo "Token: $botToken";
+        echo "Token:";
+        var_dump($botToken);
         // Discord API endpoint for updating a channel
         $endpoint = "https://discord.com/api/v10/channels/{$channelId}";
     
