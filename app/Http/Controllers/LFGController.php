@@ -53,7 +53,7 @@ class LFGController extends Controller
 			->join('discord_servers', 'discord_server_users.server_id', '=', 'discord_servers.id')
 			->join('games', 'game_users.game_id', '=', 'games.id')
 			->where('games.id', $game->id)
-			->where('discord_servers.id', $server_id)
+			->where('discord_servers.id', $server->id)
 			->where('discord_server_users.share_library', 1)
 			->get() ?? [];
 		var_dump($users);
