@@ -34,6 +34,8 @@ return [
 	'discord' => [
 		'client_id' => env('DISCORD_CLIENT_ID'),
 		'client_secret' => env('DISCORD_CLIENT_SECRET'),
+        'bot_token' => env('DISCORD_BOT_TOKEN'),
+        'stat_servers_id' => env('STAT_SERVERS'),
 	],
 
 	'steam_api_key' => env('STEAM_API_KEY'),

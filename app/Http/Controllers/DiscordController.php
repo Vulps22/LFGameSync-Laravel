@@ -9,7 +9,7 @@ class DiscordController extends Controller
     private static function renameChannel($channelId, $newName) {
         echo "rename channel $channelId";
         // Replace 'your_bot_token' with your actual bot token
-        $botToken = env("BOT_TOKEN");
+        $botToken = config('services.discord')['bot_token'];
         echo "Token:";
         var_dump($botToken);
         // Discord API endpoint for updating a channel
@@ -68,7 +68,7 @@ class DiscordController extends Controller
         echo "Set Server Stat";
         if(!$value) {echo "No Value"; return;}
 
-        $channelId = env("STAT_SERVERS");
+        $channelId = config('services.discord')["stat_servers_id"];
         if(!$value) {echo "No Channel"; return;}
 
 
