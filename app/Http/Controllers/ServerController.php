@@ -29,6 +29,7 @@ class ServerController extends Controller
         if (!$user) return json_encode(["message" => "User not found"]);
 
         $user->syncDiscordServers();
+        $user->syncGames();
 
         $server = DiscordServer::where('discord_id', $server_id)->first();
         if (!$server) return json_encode(["message" => "Server not found"]);

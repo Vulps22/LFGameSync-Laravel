@@ -36,6 +36,9 @@ return [
 		'client_secret' => env('DISCORD_CLIENT_SECRET'),
         'bot_token' => env('DISCORD_BOT_TOKEN'),
         'stat_servers_id' => env('STAT_SERVERS'),
+        'stat_users_id' => env('STAT_USERS'),
+        'stat_games_id' => env('STAT_GAMES'),
+        
 	],
 
 	'steam_api_key' => env('STEAM_API_KEY'),

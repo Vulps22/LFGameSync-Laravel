@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 class DiscordController extends Controller
 {
     private static function renameChannel($channelId, $newName) {
-        echo "rename channel $channelId";
         // Replace 'your_bot_token' with your actual bot token
         $botToken = config('services.discord')['bot_token'];
-        echo "Token:";
-        var_dump($botToken);
+
         // Discord API endpoint for updating a channel
         $endpoint = "https://discord.com/api/v10/channels/{$channelId}";
     
@@ -65,11 +63,11 @@ class DiscordController extends Controller
     }
 
     public static function setServerStat($value) {
-        echo "Set Server Stat";
-        if(!$value) {echo "No Value"; return;}
+
+        if(!$value) return;
 
         $channelId = config('services.discord')["stat_servers_id"];
-        if(!$value) {echo "No Channel"; return;}
+        if(!$value) return;
 
 
         $text = "Connected Servers: $value";
@@ -82,7 +80,7 @@ class DiscordController extends Controller
 
         if(!$value) return;
 
-        $channelId = env("STAT_USERS");
+        $channelId = config('services.discord')["stat_users_id"];
         if(!$channelId) return;
 
         $text = "Registered Users: $value";
@@ -95,7 +93,7 @@ class DiscordController extends Controller
 
         if(!$value) return;
 
-        $channelId = env("STAT_GAMES");
+        $channelId = config('services.discord')["stat_games_id"];
         if(!$channelId) return;
 
         $text = "Registered Games: $value";

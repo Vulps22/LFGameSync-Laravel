@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use \App\Helpers\DiscordAPI;
 use \App\Helpers\SteamAPI;
+use App\Http\Controllers\DiscordController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cookie;
@@ -151,6 +152,8 @@ class User extends Model implements AuthenticatableContract
 				break;
 				// Add more cases for other platforms if needed
 		}
+
+		DiscordController::setStat("games", Game::count());
 	}
 
 	public function syncSteamGames()
