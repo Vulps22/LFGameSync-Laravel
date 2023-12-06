@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LFGResource;
-use App\Models\GameUser;
 use App\Models\User;
 use App\Models\Game;
 use App\Models\DiscordServer;
@@ -29,6 +28,8 @@ class LFGController extends Controller
 
 		$game = Game::where('name', $gameName)->first();
 		if (!$game) return "Game not found";
+
+		echo "Game: " . $game->id;
 
 		$user = User::where('discord_id', $user_id)->first();
 		if (!$user) return "User not found";
