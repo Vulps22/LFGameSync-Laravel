@@ -140,6 +140,11 @@ class User extends Model implements AuthenticatableContract
 
 	public function syncGames($type)
 	{
+		if(!$type) {
+			//sync all game libraries
+			$this->syncSteamGames();
+		}
+
 		switch ($type) {
 			case 'Steam':
 				$this->syncSteamGames();

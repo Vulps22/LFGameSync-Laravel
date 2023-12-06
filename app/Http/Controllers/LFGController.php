@@ -33,6 +33,8 @@ class LFGController extends Controller
 		$user = User::where('discord_id', $user_id)->first();
 		if (!$user) return "User not found";
 
+		$user->syncGames();
+
 		$server = DiscordServer::where('discord_id', $server_id)->first();
 		if (!$server) return "Server not found";
 
@@ -73,6 +75,8 @@ class LFGController extends Controller
 		if ($server->icon_hash !== $icon_hash) $server->icon_hash = $icon_hash;
 		$server->save();
 
+		DiscordController::setStat('servers', DiscordServer::count());
+
 		return $server->id;
 	}
 
@@ -96,6 +100,7 @@ class LFGController extends Controller
 			}
 
 			$server->delete();
+			DiscordController::setStat('servers', DiscordServer::count());
 
 			return "Server Removed Successfully";
 		} catch (Exception $e) {
