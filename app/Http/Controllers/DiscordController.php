@@ -65,10 +65,10 @@ class DiscordController extends Controller
 
     public static function setServerStat($value) {
         echo "Set Server Stat";
-        if(!$value) return;
+        if(!$value) {echo "No Value"; return;}
 
         $channelId = env("STAT_SERVERS");
-        if(!$channelId) return;
+        if(!$value) {echo "No Channel"; return;}
 
 
         $text = "Connected Servers: $value";
