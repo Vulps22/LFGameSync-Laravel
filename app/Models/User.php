@@ -139,7 +139,7 @@ class User extends Model implements AuthenticatableContract
 		return $steam->getUser($accounts->steam_id);
 	}
 
-	public function syncGames($type)
+	public function syncGames($type = null)
 	{
 		if(!$type) {
 			//sync all game libraries
