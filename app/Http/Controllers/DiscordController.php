@@ -43,9 +43,6 @@ class DiscordController extends Controller
     
         // Close cURL session
         curl_close($ch);
-    
-        // Output the response
-        echo "Response: " . $response . "\n";
     }
 
     public static function setStat($channel, $value){
