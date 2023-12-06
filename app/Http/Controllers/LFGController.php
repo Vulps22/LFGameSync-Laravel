@@ -55,7 +55,7 @@ class LFGController extends Controller
 			->where('discord_servers.id', $server_id)
 			->where('discord_server_users.share_library', 1)
 			->get() ?? [];
-
+		var_dump($users);
 		return LFGResource::collection($users);
 	}
 
