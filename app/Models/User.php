@@ -162,7 +162,7 @@ class User extends Model implements AuthenticatableContract
 		if(!$this->linkedAccounts->steam_id) return;
 
 		$steam = new SteamAPI();
-		$steamGames = $steam->getPlayerOwnedGames($this->linkedAccounts->steam_id)['response'];
+		$steamGames = $steam->getPlayerOwnedGames($this->linkedAccounts->steam_id)['response'] ?? [];
 		if (!$steamGames || !array_key_exists('games', $steamGames)) {
 			return;
 		}

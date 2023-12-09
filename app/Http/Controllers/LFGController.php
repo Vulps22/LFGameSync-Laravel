@@ -30,11 +30,11 @@ class LFGController extends Controller
 		if (!$game) return "Game not found";
 
 		$user = User::firstOrNew(['discord_id' => $user_id]);
-		if(!$user->exists) $user->save();
+		if (!$user->exists) $user->save();
 
 		$user->syncGames();
 
-		$server = DiscordServer::where('discord_id', $server_id)->first(); 
+		$server = DiscordServer::where('discord_id', $server_id)->first();
 		if (!$server) return "Server not found"; //do not try to register new server from here. Always from the bot
 
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->firstOrNew();
@@ -55,6 +55,22 @@ class LFGController extends Controller
 			->get() ?? [];
 
 		return LFGResource::collection($users);
+	}
+
+	public function find_game(Request $request)
+	{
+		$name = $request->input('name');
+		if (!$name) return [];
+
+		// Fetch game suggestions from the database based on user input
+		$suggestions = Game::select('name')
+			->where('name', 'like', '%' . $name . '%')
+			->limit(25)
+			->pluck('name');
+
+			return $suggestions;
+
+		
 	}
 
 	/**
