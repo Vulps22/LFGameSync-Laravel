@@ -29,16 +29,16 @@ class LFGController extends Controller
 		$game = Game::where('name', $gameName)->first();
 		if (!$game) return "Game not found";
 
-		$user = User::where('discord_id', $user_id)->first();
-		if (!$user) return "User not found";
+		$user = User::firstOrNew(['discord_id' => $user_id]);
+		if(!$user->exists) $user->save();
 
 		$user->syncGames();
 
-		$server = DiscordServer::where('discord_id', $server_id)->first();
-		if (!$server) return "Server not found";
+		$server = DiscordServer::where('discord_id', $server_id)->first(); 
+		if (!$server) return "Server not found"; //do not try to register new server from here. Always from the bot
 
-		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->first();
-		if (!$discordServerUser) return "Server User not Registered";
+		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->firstOrNew();
+		if (!$discordServerUser->exists) $discordServerUser->save();
 
 		//if the user is not sharing their library with this server
 		if (!$discordServerUser->share_library) return "Not Sharing";

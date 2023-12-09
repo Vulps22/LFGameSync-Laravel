@@ -18,3 +18,4 @@ Route::get('/lfg/find', [App\Http\Controllers\LFGController::class, 'find'])->na
 Route::post('/lfg/register_server', [App\Http\Controllers\LFGController::class, 'register_server'])->name('lfg.register_server');
 Route::post('/lfg/remove_server', [App\Http\Controllers\LFGController::class, 'remove_server'])->name('lfg.remove_server');
 Route::post('/server/set_sharing', [App\Http\Controllers\ServerController::class, 'set_sharing'])->name('server.set_sharing');
+Route::post('/server/register_user', [\App\Http\Controllers\ServerController::class, 'register_user'])->name('server.register_user');
