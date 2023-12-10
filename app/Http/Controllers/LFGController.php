@@ -38,7 +38,10 @@ class LFGController extends Controller
 		if (!$server) return "Server not found"; //do not try to register new server from here. Always from the bot
 
 		$discordServerUser = $user->discordServers()->where('server_id', $server->id)->firstOrNew();
-		if (!$discordServerUser->exists) $discordServerUser->save();
+		if (!$discordServerUser->exists) {
+			$discordServerUser->server_id = $server_id;
+			$discordServerUser->save();
+		}
 
 		//if the user is not sharing their library with this server
 		if (!$discordServerUser->share_library) return "Not Sharing";
