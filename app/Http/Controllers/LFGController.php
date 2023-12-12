@@ -18,15 +18,15 @@ class LFGController extends Controller
 	public function find(Request $request)
 	{
 
-		$gameName = $request->input('game');
-		if (!$gameName) return "No game name provided";
+		$gameId = $request->input('game_id'); //use local Game ID not Store Game ID
+		if (!$gameId) return "No game ID provided";
 
 		$user_id = $request->input('user_id'); //the user's discord ID
 		if (!$user_id) return "No user ID provided";
 
 		$server_id = $request->input('server');
 
-		$game = Game::where('name', $gameName)->first();
+		$game = Game::where('id', $gameId)->first();
 		if (!$game) return "Game not found";
 
 		$user = User::firstOrNew(['discord_id' => $user_id]);
@@ -60,6 +60,10 @@ class LFGController extends Controller
 		return LFGResource::collection($users);
 	}
 
+	/**
+	 * return a list of 25 game suggestions
+	 * @param String name
+	 */
 	public function find_game(Request $request)
 	{
 		$name = $request->input('name');
@@ -72,21 +76,29 @@ class LFGController extends Controller
 			->get();
 
 		$games = $suggestions->map(function ($game) {
-			return ['name' => $game->name];
+			return ['id' => $game->id, 'name' => $game->name];
 		});
 
 		return $games->toArray();
 	}
 
+	/**
+	 * return a game object for the bot
+	 * @param string id
+	 */
+
 	public function get_game(Request $request)
 	{
-		$name = $request->input('name');
-		if (!$name) return [];
+		$id = $request->input('id');
 
-		$game = Game::where('name', $name)->first();
+		if(!$id) return [];
 
-		return ['id' => $game->game_id, 'name' => $game->name, 'image' => $game->image_url];
-
+		$game = null;
+		$game = Game::where('id', $id)->first();
+		
+		if (!$game) return [];
+		
+		return ['id' => $game->id, 'storeId' => $game->game_id, 'name' => $game->name, 'image' => $game->image_url];
 	}
 
 	/**
