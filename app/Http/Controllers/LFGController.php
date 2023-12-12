@@ -69,11 +69,13 @@ class LFGController extends Controller
 		$suggestions = Game::select('name')
 			->where('name', 'like', '%' . $name . '%')
 			->limit(25)
-			->pluck('name');
+			->get();
 
-			return $suggestions;
+			$games = $suggestions->map(function ($game) {
+				return ['name' => $game->name];
+			});
 
-		
+			return $games->toArray();
 	}
 
 	/**
