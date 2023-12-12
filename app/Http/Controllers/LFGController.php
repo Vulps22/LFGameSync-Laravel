@@ -71,11 +71,22 @@ class LFGController extends Controller
 			->limit(25)
 			->get();
 
-			$games = $suggestions->map(function ($game) {
-				return ['name' => $game->name];
-			});
+		$games = $suggestions->map(function ($game) {
+			return ['name' => $game->name];
+		});
 
-			return $games->toArray();
+		return $games->toArray();
+	}
+
+	public function get_game(Request $request)
+	{
+		$name = $request->input('name');
+		if (!$name) return [];
+
+		$game = Game::where('name', $name)->first();
+
+		return ['id' => $game->game_id, 'name' => $game->name, 'image' => $game->image_url];
+
 	}
 
 	/**
