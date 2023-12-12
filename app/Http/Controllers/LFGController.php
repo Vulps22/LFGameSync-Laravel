@@ -70,7 +70,7 @@ class LFGController extends Controller
 		if (!$name) return [];
 
 		// Fetch game suggestions from the database based on user input
-		$suggestions = Game::select('name')
+		$suggestions = Game::select('id', 'name')
 			->where('name', 'like', '%' . $name . '%')
 			->limit(25)
 			->get();
