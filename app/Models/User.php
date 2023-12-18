@@ -79,11 +79,11 @@ class User extends Model implements AuthenticatableContract
 	// Discord Related Methods
 	public function discordUser()
 	{
-		if($this->isTokenLogin) {
-		if (!$this->discord_access_token) return false;
-		$discord = new DiscordAPI();
-		return $discord->getUser($this->discord_access_token);
-		}else{
+		if ($this->isTokenLogin) {
+			if (!$this->discord_access_token) return false;
+			$discord = new DiscordAPI();
+			return $discord->getUser($this->discord_access_token);
+		} else {
 			$discord = new DiscordAPI();
 			return $discord->getUserById($this->discord_id);
 		}
@@ -102,17 +102,16 @@ class User extends Model implements AuthenticatableContract
 		foreach ($servers as $server) {
 			//if the server exists add a discord_server_user record
 			$discordServer = DiscordServer::where(['discord_id' => $server['id']])->first();
-			if(!$discordServer) continue;
+			if (!$discordServer) continue;
 
 			$serverUser = DiscordServerUser::firstOrNew(['server_id' => $discordServer->id, 'user_id' => $this->id]);
-			if(!$serverUser->exists) {
+			if (!$serverUser->exists) {
 				$serverUser->share_library = false;
 			}
 
 			//this server exists so we don't want to delete it
 			$serverUser->should_delete = false;
 			$serverUser->save();
-			
 		}
 
 		//delete all servers that should be deleted
@@ -149,7 +148,7 @@ class User extends Model implements AuthenticatableContract
 
 	public function syncGames($type = null)
 	{
-		if(!$type) {
+		if (!$type) {
 			//sync all game libraries
 			$this->syncSteamGames();
 		}
@@ -166,8 +165,8 @@ class User extends Model implements AuthenticatableContract
 
 	public function syncSteamGames()
 	{
-		if(!$this->linkedAccounts) return;
-		if(!$this->linkedAccounts->steam_id) return;
+		if (!$this->linkedAccounts) return;
+		if (!$this->linkedAccounts->steam_id) return;
 
 		$steam = new SteamAPI();
 		$steamGames = $steam->getPlayerOwnedGames($this->linkedAccounts->steam_id)['response'] ?? [];
@@ -187,9 +186,10 @@ class User extends Model implements AuthenticatableContract
 		}
 	}
 
-	public function unlinkSteamGames(){
+	public function unlinkSteamGames()
+	{
 		$games = GameUser::where('user_id', $this->id)->get();
-		foreach($games as $game){
+		foreach ($games as $game) {
 			$game->delete();
 		}
 	}
