@@ -44,7 +44,7 @@ class DiscordAPI
 	public static function getUserById($id)
 	{
 
-		$token = config('services.discord')['discord_bot_token'];
+		$token = config('services.discord')['bot_token'];
 		dump($token);
 		/*
 		$response = Http::withHeaders([
