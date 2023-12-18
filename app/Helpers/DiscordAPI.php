@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Http;
 
 class DiscordAPI
 {
-	public static function getAuthURL(){
+	public static function getAuthURL()
+	{
 		$params = [
 			'client_id' => config('services.discord')['client_id'],
 			'redirect_uri' => route('discord.callback'),
@@ -30,9 +31,8 @@ class DiscordAPI
 		$response = Http::asForm()->post('https://discord.com/api/oauth2/token', $data);
 
 		if (!$response->successful()) return null;
-		
-		return $response->json();
 
+		return $response->json();
 	}
 
 	public static function getUser($accessToken)
@@ -41,35 +41,63 @@ class DiscordAPI
 		return $user->json();
 	}
 
-	public static function getUserById($id) {
+	public static function getUserById($id)
+	{
 
 		$token = config('services.discord')['client_secret'];
-	dump($token);
+		dump($token);
+		/*
 		$response = Http::withHeaders([
 				'Authorization' => "$token"
 			])->get("https://discord.com/api/users/$id");
 			dump($response->headers());
 			error_log(json_encode($response->json()));
 			dd($response->json());
+			*/
+
+		$url = "https://discord.com/api/users/$id";
+
+		// Create cURL session
+		$ch = curl_init($url);
+
+		// Set cURL options
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, [
+			'Authorization: ' . $token,
+		]);
+
+		// Execute cURL session and get the result
+		$response = curl_exec($ch);
+
+		// Check for cURL errors
+		if (curl_errno($ch)) {
+			echo 'cURL error: ' . curl_error($ch);
+		}
+
+		// Close cURL session
+		curl_close($ch);
+
+		// Dump the response
+		dd($response);
 	}
 
 	public static function refreshToken($refreshToken)
-    {
-        $data = [
-            'client_id' => env('DISCORD_CLIENT_ID'),
-            'client_secret' => env('DISCORD_CLIENT_SECRET'),
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $refreshToken
-        ];
+	{
+		$data = [
+			'client_id' => env('DISCORD_CLIENT_ID'),
+			'client_secret' => env('DISCORD_CLIENT_SECRET'),
+			'grant_type' => 'refresh_token',
+			'refresh_token' => $refreshToken
+		];
 
-        $response = Http::asForm()->post('https://discord.com/api/oauth2/token', $data);
+		$response = Http::asForm()->post('https://discord.com/api/oauth2/token', $data);
 
-        if ($response->successful()) {
-            return $response->json();
-        } else {
-            return null; // Handle error cases here
-        }
-    }
+		if ($response->successful()) {
+			return $response->json();
+		} else {
+			return null; // Handle error cases here
+		}
+	}
 
 	public static function getGuilds($accessToken)
 	{
