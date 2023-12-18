@@ -48,7 +48,7 @@ class DiscordAPI
 		$response = Http::withHeaders([
 				'Authorization' => "$token"
 			])->get("https://discord.com/api/users/$id");
-			error_log($response->json());
+			error_log(json_encode($response->json()));
 			return $response->json();
 	}
 
