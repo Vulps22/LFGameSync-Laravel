@@ -44,10 +44,11 @@ class DiscordAPI
 	public static function getUserById($id) {
 
 		$token = config('services.discord')['client_secret'];
-	
+	dump($token);
 		$response = Http::withHeaders([
 				'Authorization' => "$token"
 			])->get("https://discord.com/api/users/$id");
+			dump($response->headers());
 			error_log(json_encode($response->json()));
 			dd($response->json());
 	}
