@@ -77,6 +77,8 @@ class DiscordAPI
 		// Close cURL session
 		curl_close($ch);
 
+		dump(curl_getinfo($ch, CURLINFO_HEADER_OUT));
+
 		// Dump the response
 		dd($response);
 	}
