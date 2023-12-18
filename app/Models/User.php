@@ -80,10 +80,12 @@ class User extends Model implements AuthenticatableContract
 	public function discordUser()
 	{
 		if ($this->isTokenLogin) {
+			error_log('Starting Token Login');
 			if (!$this->discord_access_token) return false;
 			$discord = new DiscordAPI();
 			return $discord->getUser($this->discord_access_token);
 		} else {
+			error_log('Starting ID Login');
 			$discord = new DiscordAPI();
 			return $discord->getUserById($this->discord_id);
 		}
