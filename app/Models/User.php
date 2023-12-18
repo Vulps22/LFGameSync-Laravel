@@ -17,6 +17,8 @@ class User extends Model implements AuthenticatableContract
 	use HasFactory;
 	use Authenticatable;
 
+	public $isTokenLogin = true;
+
 	protected $fillable = [
 		'discord_id'
 	];
@@ -77,9 +79,14 @@ class User extends Model implements AuthenticatableContract
 	// Discord Related Methods
 	public function discordUser()
 	{
+		if($this->isTokenLogin) {
 		if (!$this->discord_access_token) return false;
 		$discord = new DiscordAPI();
 		return $discord->getUser($this->discord_access_token);
+		}else{
+			$discord = new DiscordAPI();
+			return $discord->getUserById($this->discord_id);
+		}
 	}
 
 	public function syncDiscordServers()
@@ -115,6 +122,9 @@ class User extends Model implements AuthenticatableContract
 	public function discordAvatar()
 	{
 		$discord = new DiscordAPI();
+
+		dd($this->discordUser());
+
 		return $discord->getAvatar($this->discord_id, $this->discordUser()['avatar']);
 	}
 

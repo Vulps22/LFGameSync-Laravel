@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AccountLinking;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,5 @@ Route::get('/login/callback', [DiscordController::class, 'handleDiscordCallback'
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/link', [AccountLinking::class, 'index'])->name('account.links');

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\DiscordController;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\LFGResource;
 use App\Models\User;
 use App\Models\Game;

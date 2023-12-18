@@ -41,6 +41,17 @@ class DiscordAPI
 		return $user->json();
 	}
 
+	public static function getUserById($id) {
+
+		$token = config('services.discord')['client_secret'];
+	
+		$response = Http::withHeaders([
+				'Authorization' => "$token"
+			])->get("https://discord.com/api/users/$id");
+	
+			return $response->json();
+	}
+
 	public static function refreshToken($refreshToken)
     {
         $data = [
