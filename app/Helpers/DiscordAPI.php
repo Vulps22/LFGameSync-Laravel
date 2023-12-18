@@ -62,6 +62,7 @@ class DiscordAPI
 
 		// Set cURL options
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
 			'Authorization: ' . $token,
 		]);
