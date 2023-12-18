@@ -123,8 +123,6 @@ class User extends Model implements AuthenticatableContract
 	{
 		$discord = new DiscordAPI();
 
-		dd($this->discordUser());
-
 		return $discord->getAvatar($this->discord_id, $this->discordUser()['avatar']);
 	}
 
