@@ -66,7 +66,7 @@ class DiscordAPI
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
 			'Authorization: ' . $token,
 		]);
-
+		dump(curl_getinfo($ch, CURLINFO_HEADER_OUT));
 		// Execute cURL session and get the result
 		$response = curl_exec($ch);
 
@@ -78,7 +78,7 @@ class DiscordAPI
 		// Close cURL session
 		curl_close($ch);
 
-		dump(curl_getinfo($ch, CURLINFO_HEADER_OUT));
+
 
 		// Dump the response
 		dd($response);
