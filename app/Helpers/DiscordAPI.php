@@ -64,7 +64,7 @@ class DiscordAPI
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			'Authorization: Bot' . $token,
+			'Authorization: Bot ' . $token,
 		]);
 		dump(curl_getinfo($ch, CURLINFO_HEADER_OUT));
 		// Execute cURL session and get the result
