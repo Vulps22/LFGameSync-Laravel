@@ -48,6 +48,8 @@ class SteamController extends Controller
 		$accounts->steam_id = $steamId;
 		$accounts->save();
 
+		if(auth()->user()->isTokenLogin) return redirect('/link');
+
 		return redirect('/dashboard'); // Redirect after successful login
 	}
 

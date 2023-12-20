@@ -14,7 +14,7 @@ class DashboardController extends Controller
 	public function index()
 	{
 		if (!auth()->check()) return redirect('/');
-
+		if(auth()->user()->isTokenLogin) return redirect('/');
 		$this->syncDiscordServers();
 
 		$userId = auth()->user()->id;

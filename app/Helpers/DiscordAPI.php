@@ -66,7 +66,7 @@ class DiscordAPI
 			'Authorization: Bot ' . $token,
 		]);
 		// Execute cURL session and get the result
-		$response = curl_exec($ch);
+		//$response = curl_exec($ch);
 
 		// Check for cURL errors
 		if (curl_errno($ch)) {
@@ -75,7 +75,23 @@ class DiscordAPI
 
 		// Close cURL session
 		curl_close($ch);
-		dd(json_decode($response, true));
+
+		$response = '{
+			"id": "914368203482890240",
+			"username": "vulps23",
+			"avatar": "551710b555740ac583bd9d63009fcb65",
+			"discriminator": "0",
+			"public_flags": 4194368,
+			"premium_type": 2,
+			"flags": 4194368,
+			"banner": "a_e4a2709878c11008cf7ee192ea5c2069",
+			"accent_color": 7812399,
+			"global_name": "Vulps",
+			"avatar_decoration_data": null,
+			"banner_color": "#77352f"
+		  }
+		  ';
+		//dd(json_decode($response, true));
 		return json_decode($response, true);
 	}
 

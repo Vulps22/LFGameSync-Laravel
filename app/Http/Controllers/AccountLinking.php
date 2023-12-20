@@ -14,8 +14,10 @@ class AccountLinking extends Controller
 
     public function __construct()
     {
+        if(Auth::check()) return;
+
         $token = request()->get('token'); 
-        if(!$token) { echo "Token Not Provided"; exit(); }
+        if(!$token) { echo "Token Not Provided"; return; }
         $this->token = LinkToken::where('token', $token)->first();
         Auth::loginUsingId($this->token->user_id);
         if(!Auth::check()) {echo "Authentication Failed, Please Try again or open a ticket on the Support Server"; exit();}
