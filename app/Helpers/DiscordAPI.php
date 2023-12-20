@@ -75,7 +75,7 @@ class DiscordAPI
 
 		// Close cURL session
 		curl_close($ch);
-		return $response;
+		return json_decode($response);
 	}
 
 	public static function refreshToken($refreshToken)
