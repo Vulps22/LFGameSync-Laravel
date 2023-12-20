@@ -28,12 +28,13 @@ class AccountLinking extends Controller
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
             exit();
         }
-        Auth::user()->isTokenLogin = false;
-        // Attach the cookie to the response
 
         $cookie = cookie('oneTimeToken', $token, 15);
 
-        return response('Cookie')->cookie($cookie);
+        // Attach the cookie to the response
+        Cookie()->queue($cookie);
+
+        Auth::user()->isTokenLogin = false;
 
     }
 
