@@ -28,15 +28,15 @@ class AccountLinking extends Controller
             exit();
         }
 
-        // Attach the cookie to the response
-        Cookie::queue(Cookie::make('oneTimeToken', $token, 15));
+
 
         Auth::user()->isTokenLogin = false;
-
     }
 
     public function index(): View
     {
+        // Attach the cookie to the response
+        Cookie::queue(Cookie::make('oneTimeToken', $this->token, 15));
         return view('account-linking', [
             'token' => $this->token
         ]);
