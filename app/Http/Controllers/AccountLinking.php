@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LinkToken;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AccountLinking extends Controller
 {
@@ -15,11 +16,10 @@ class AccountLinking extends Controller
     public function __construct()
     {
         if (Auth::check()) return;
-        $token = request()->get('token');
+        $token = request()->get('token') ?? request()->cookie('oneTimeToken');
+        dd($token);
         if (!$token) {
-            dd(Auth::user());
-            echo "Token Not Provided";
-            return;
+            return redirect('/');
         }
         $this->token = LinkToken::where('token', $token)->first();
         Auth::loginUsingId($this->token->user_id);
@@ -27,12 +27,18 @@ class AccountLinking extends Controller
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
             exit();
         }
+
+        $cookie = Cookie::make('oneTimeToken', $token, 15);
+
+        // Attach the cookie to the response
+        app('cookie')->queue($cookie);
+
         Auth::user()->isTokenLogin = false;
+
     }
 
     public function index(): View
     {
-
         return view('account-linking', [
             'token' => $this->token
         ]);
