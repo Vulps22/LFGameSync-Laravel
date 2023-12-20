@@ -17,7 +17,7 @@ class AccountLinking extends Controller
     {
         if (Auth::check()) return;
         $token = request()->get('token') ?? request()->cookie('oneTimeToken');
-        dd($token);
+        dump($token);
         if (!$token) {
             return redirect('/');
         }
