@@ -16,7 +16,7 @@ class AccountLinking extends Controller
     public function __construct()
     {
         if (Auth::check()) return;
-        $token = request()->get('token') ?? Cookie::get('oneTimeToken');
+        $token = request()->get('token') ?? request()->cookie('oneTimeToken');
         dump($token);
         if (!$token) {
             return redirect('/');
@@ -33,12 +33,13 @@ class AccountLinking extends Controller
         Auth::user()->isTokenLogin = false;
     }
 
-    public function index(): View
+    public function index()
     {
         // Attach the cookie to the response
         Cookie::queue(Cookie::make('oneTimeToken', $this->token, 15));
-        return view('account-linking', [
+        $cookie = cookie('oneTimeToken', $this->token, 15);
+        return response(view('account-linking', [
             'token' => $this->token
-        ]);
+        ]))->cookie($cookie);
     }
 }
