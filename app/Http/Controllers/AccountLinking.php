@@ -15,7 +15,7 @@ class AccountLinking extends Controller
     public function __construct()
     {
         if (Auth::check()) return;
-        dd(Auth::user());
+       // dd(Auth::user());
         $token = request()->get('token');
         if (!$token) {
             echo "Token Not Provided";
