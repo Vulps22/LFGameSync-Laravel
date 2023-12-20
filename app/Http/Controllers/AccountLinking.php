@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LinkToken;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-//use Cookie;
-use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Support\Facades\Cookie;
 
 class AccountLinking extends Controller
 {
@@ -30,7 +29,7 @@ class AccountLinking extends Controller
         }
 
         // Attach the cookie to the response
-        Cookie()->queue(Cookie::make('oneTimeToken', $token, 15));
+        Cookie::queue(Cookie::make('oneTimeToken', $token, 15));
 
         Auth::user()->isTokenLogin = false;
 
