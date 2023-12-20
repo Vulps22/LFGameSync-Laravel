@@ -75,6 +75,7 @@ class DiscordAPI
 
 		// Close cURL session
 		curl_close($ch);
+		dd(json_decode($response, true));
 		return json_decode($response, true);
 	}
 
