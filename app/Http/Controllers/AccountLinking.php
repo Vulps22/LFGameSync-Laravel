@@ -29,10 +29,8 @@ class AccountLinking extends Controller
             exit();
         }
 
-        $cookie = cookie('oneTimeToken', $token, 15);
-
         // Attach the cookie to the response
-        Cookie()->queue($cookie);
+        Cookie()->queue(Cookie::make('oneTimeToken', $token, 15));
 
         Auth::user()->isTokenLogin = false;
 
