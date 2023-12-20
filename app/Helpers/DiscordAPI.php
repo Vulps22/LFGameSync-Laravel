@@ -45,7 +45,6 @@ class DiscordAPI
 	{
 
 		$token = config('services.discord')['bot_token'];
-		dump($token);
 		/*
 		$response = Http::withHeaders([
 				'Authorization' => "$token"
@@ -66,7 +65,6 @@ class DiscordAPI
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
 			'Authorization: Bot ' . $token,
 		]);
-		dump(curl_getinfo($ch, CURLINFO_HEADER_OUT));
 		// Execute cURL session and get the result
 		$response = curl_exec($ch);
 
@@ -77,11 +75,7 @@ class DiscordAPI
 
 		// Close cURL session
 		curl_close($ch);
-
-
-
-		// Dump the response
-		dd($response);
+		return $response;
 	}
 
 	public static function refreshToken($refreshToken)
