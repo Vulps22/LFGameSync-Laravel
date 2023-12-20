@@ -3,7 +3,7 @@
 @section('content')
 <div>
 <div class="mx-[45%] mt-52">
-        <livewire:profile-card type="Discord" useGameAccounts="true" />
+        <livewire:profile-card type="Discord" useGameAccounts="false" />
     </div>
     <div class="mx-[45%] mt-52">
         <livewire:profile-card type="Steam" useGameAccounts="true" />
