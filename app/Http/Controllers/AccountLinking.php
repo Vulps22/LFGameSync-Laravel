@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\LinkToken;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
+//use Cookie;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class AccountLinking extends Controller
 {
@@ -27,13 +28,12 @@ class AccountLinking extends Controller
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
             exit();
         }
-
-        $cookie = Cookie::make('oneTimeToken', $token, 15);
-
-        // Attach the cookie to the response
-        app('cookie')->queue($cookie);
-
         Auth::user()->isTokenLogin = false;
+        // Attach the cookie to the response
+
+        $cookie = cookie('oneTimeToken', $token, 15);
+
+        return response('Cookie')->cookie($cookie);
 
     }
 
