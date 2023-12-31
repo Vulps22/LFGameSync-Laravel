@@ -25,7 +25,7 @@ class AccountLinking extends Controller
         
         $this->token = LinkToken::where('token', $token)->first();
        // dd($this->token);
-       if(!$token) dd("TOKEN NOT FOUND!");
+       if(!$this->token) dd("TOKEN NOT FOUND!");
         Auth::loginUsingId($this->token->user_id);
         if (!Auth::check()) {
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
