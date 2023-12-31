@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class AccountsController extends Controller
 {
-    public function link_steam(Request $request)
+    public function link_token(Request $request)
     {
         $discordId = $request->discord_id;
 

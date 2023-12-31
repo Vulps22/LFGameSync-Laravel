@@ -25,4 +25,4 @@ Route::post('/server/set_sharing', [App\Http\Controllers\Api\V1\ServerController
 Route::post('/server/register_user', [\App\Http\Controllers\Api\V1\ServerController::class, 'register_user'])->name('server.register_user');
 
 
-Route::get ('/account/link_steam', [App\Http\Controllers\Api\V1\AccountsController::class, 'link_steam'])->name('account.link_steam');
+Route::get ('/account/link_token', [App\Http\Controllers\Api\V1\AccountsController::class, 'link_token'])->name('account.link_token');
