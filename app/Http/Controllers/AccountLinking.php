@@ -31,7 +31,8 @@ class AccountLinking extends Controller
 
         //if token is expired, delete it
         if ($this->token->isExpired()) {
-            $this->token->delete();
+            dd("Expired");
+           // $this->token->delete();
             abort(401);
         }
 
