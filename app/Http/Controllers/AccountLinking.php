@@ -17,13 +17,13 @@ class AccountLinking extends Controller
     {
         if (Auth::check()) return;
         $token = request()->get('token') ?? request()->cookie('oneTimeToken');
-        dump($token);
+       // dump($token);
         if (!$token) {
             return redirect('/');
         }
         
         $this->token = LinkToken::where('token', $token)->first();
-        dd($this->token);
+       // dd($this->token);
         Auth::loginUsingId($this->token->user_id);
         if (!Auth::check()) {
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
