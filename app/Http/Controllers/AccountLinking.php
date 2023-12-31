@@ -21,25 +21,24 @@ class AccountLinking extends Controller
         if (!$token) {
             return redirect('/');
         }
+        
         $this->token = LinkToken::where('token', $token)->first();
+        dd($this->token);
         Auth::loginUsingId($this->token->user_id);
         if (!Auth::check()) {
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
             exit();
         }
 
-
-
         Auth::user()->isTokenLogin = false;
     }
 
-    public function index()
+    public function index(): View
     {
         // Attach the cookie to the response
         Cookie::queue(Cookie::make('oneTimeToken', $this->token, 15));
-        $cookie = cookie('oneTimeToken', $this->token, 15);
-        return response(view('account-linking', [
+        return view('account-linking', [
             'token' => $this->token
-        ]))->cookie($cookie);
+        ]);
     }
 }
