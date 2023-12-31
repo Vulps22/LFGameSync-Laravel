@@ -30,7 +30,7 @@ class AccountLinking extends Controller
         if (!$this->token) abort(401);
 
         //if token is expired, delete it
-        if (now()->isAfter($this->token->expires)) {
+        if ($this->token->isExpired()) {
             $this->token->delete();
             abort(401);
         }
