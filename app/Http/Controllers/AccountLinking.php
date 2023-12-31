@@ -41,7 +41,7 @@ class AccountLinking extends Controller
             abort(401);
         }
 
-        dump($this->token);
+        dump($token);
         Cookie::queue(Cookie::make('oneTimeToken', $token, 15));
         Auth::user()->isTokenLogin = false;
     }
