@@ -15,6 +15,7 @@ class AccountLinking extends Controller
 
     public function __construct()
     {
+        //if logged in, no need to do everything else
         if (Auth::check()) return;
         $token = request()->get('token') ?? request()->cookie('oneTimeToken');
        // dump($token);
@@ -24,6 +25,7 @@ class AccountLinking extends Controller
         
         $this->token = LinkToken::where('token', $token)->first();
        // dd($this->token);
+       if(!$token) dd("TOKEN NOT FOUND!");
         Auth::loginUsingId($this->token->user_id);
         if (!Auth::check()) {
             echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
