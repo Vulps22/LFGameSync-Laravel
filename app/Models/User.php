@@ -17,6 +17,10 @@ class User extends Model implements AuthenticatableContract
 	use HasFactory;
 	use Authenticatable;
 
+	/**
+	 * is the user logged in with a discord Token?
+	 * False if the user logged in with an LFGameSync token
+	 */
 	public $isTokenLogin = true;
 
 	protected $fillable = [
