@@ -28,7 +28,7 @@ class LinkToken extends Model
     
     public function isExpired()
     {
-        return $this->expires->isPast();    
+        return now()->isAfter($this->expires);    
     }
 
 }
