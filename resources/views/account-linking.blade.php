@@ -2,6 +2,7 @@
 
 @section('content')
 <div>
+    {{now()}}
     <div class="mx-[45%] mt-52">
             <livewire:profile-card type="Discord" />
         </div>
