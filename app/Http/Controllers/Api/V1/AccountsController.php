@@ -19,12 +19,13 @@ class AccountsController extends Controller
         if(!$user->exists()) $user->save();
 
         $token = hash('sha256', $discordId . now());
-        
-        LinkToken::create([
-            'user_id' => $user->id,
-            'token' => $token,
-            'expires' => now()->addMinutes(15)
+
+        $link = LinkToken::firstOrCreate([
+            'user_id' => $user->id
         ]);
+
+        $link->token = $token;
+        $link->expires = now()->addMinutes(15);
 
         return response()->json([
             'token' => $token

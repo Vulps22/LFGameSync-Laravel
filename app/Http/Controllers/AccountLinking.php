@@ -29,8 +29,14 @@ class AccountLinking extends Controller
 
         if (!$this->token) abort(401);
 
+        //if token is expired, delete it
+        if (now()->isAfter($this->token->expires)) {
+            $this->token::delete();
+            abort(401);
+        }
+
         Auth::loginUsingId($this->token->user_id);
-        
+
         if (!Auth::check()) {
             abort(401);
         }
