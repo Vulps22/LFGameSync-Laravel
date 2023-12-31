@@ -8,6 +8,8 @@ class LinkToken extends Model
 {
 
     use HasFactory;
+
+    protected $primaryKey = 'token';
     
     protected $fillable = [
         'token',
