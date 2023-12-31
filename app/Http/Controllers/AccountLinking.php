@@ -25,17 +25,14 @@ class AccountLinking extends Controller
             return redirect('/');
         }
 
-        dump($token);
         $this->token = LinkToken::where('token', $token)->first();
-        dump($this->token);
 
         if (!$this->token) dd("TOKEN NOT FOUND!");
 
         Auth::loginUsingId($this->token->user_id);
         
         if (!Auth::check()) {
-            echo "Authentication Failed, Please Try again or open a ticket on the Support Server";
-            exit();
+            dd("Authentication Failed, Please Try again or open a ticket on the Support Server");
         }
 
         Cookie::queue(Cookie::make('oneTimeToken', $this->token->token, 15));
