@@ -16,6 +16,10 @@ class LinkToken extends Model
         'user_id',
         'expires',
     ];
+
+    protected $casts = [
+        'expires' => 'date'
+    ];
     
     public function user()
     {
