@@ -36,7 +36,7 @@ class AccountLinking extends Controller
     public function index(): View
     {
         // Attach the cookie to the response
-        Cookie::queue(Cookie::make('oneTimeToken', $this->token, 15));
+        Cookie::queue(Cookie::make('oneTimeToken', $this->token->token, 15));
         return view('account-linking', [
             'token' => $this->token
         ]);

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div token={{$token}}>
+<div token={{$token->token}}>
     <div class="mx-[45%] mt-52">
             <livewire:profile-card type="Discord" />
         </div>
