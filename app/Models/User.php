@@ -154,20 +154,20 @@ class User extends Model implements AuthenticatableContract
 
 	public function scopeNeedsSyncing($query)
 	{
-		// Calculate the fraction of users to sync based on the last 24 hours
 		$usersToSync = intval($this->count() / 24);
 		if ($usersToSync < 10) $usersToSync = 10;
 
-		return $query->leftJoin('game_accounts', 'users.id', '=', 'game_accounts.user_id')
+		return $query->select('users.*', 'game_accounts.*')
+			->join('game_accounts', 'users.id', '=', 'game_accounts.user_id')
+			->where('game_accounts.syncing', false)
 			->where(function ($query) {
-				// Select users that need syncing
-				$query->whereDoesntHave('linkedAccounts', function ($query) {
-					// Ensure the last sync is more than 24 hours ago or has never been synced
-					$query->whereNull('last_sync')->orWhere('last_sync', '<', now()->subHours(24));
-				});
-			})->orderBy('game_accounts.last_sync') // Order by the oldest last_sync in game_accounts
-			->take($usersToSync);
+				$query->whereNull('game_accounts.last_sync')
+					->orWhere('game_accounts.last_sync', '<', now()->subHours(24));
+			})
+			->orderBy('game_accounts.last_sync', 'desc')
+			->limit($usersToSync);
 	}
+
 
 
 	public function syncGames($type = null)
