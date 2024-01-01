@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Http\Controllers\DiscordController;
 use App\Models\User;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,7 +30,9 @@ class SyncGameLibraries implements ShouldQueue
 
     public function handle()
     {
+        try{
         DiscordController::sendMessage('sync', "Starting Hourly Sync Job");
+    
         // Get users to sync
         $users = User::needsSyncing()->get();
 
@@ -41,5 +44,9 @@ class SyncGameLibraries implements ShouldQueue
         }
 
         DiscordController::sendMessage('sync', "Successfully Synced {{count($users)}} users");
+        }catch(Exception $e) {
+            DiscordController::sendMessage('error', "Error while running Hourly Sync: \n {{$e->getMessage()}}");
+            DiscordController::sendMessage('sync', "Hourly Sync Failed! An Exception was caught");
+        }
     }
 }
