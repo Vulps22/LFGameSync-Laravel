@@ -33,7 +33,7 @@ class SyncGameLibraries implements ShouldQueue
 
         // Sync each user
         foreach ($users as $user) {
-            $user->syncGames('Steam');
+            $user->syncGames();
 
             // Handle errors
 
