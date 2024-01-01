@@ -35,19 +35,19 @@
 	<p class="mb-4">All data is stored on servers located in Germany.</p>
 
 	<h2 class="text-xl font-bold mb-2">Data retention</h2>
-	<p class="mb-4">We retain personal data until a user requests its removal by opening a ticket on the <a href="https://discord.gg/ZhC4JVFFUV">LFGameSync Discord Support Server</a>. We will delete all data within 30 days of receiving the request.</p>
+	<p class="mb-4">We retain personal data until a user requests its removal by opening a ticket on the <a href="https://discord.gg/ZhC4JVFFUV" class="text-gray-500 underline">LFGameSync Discord Support Server</a>. We will delete all data within 30 days of receiving the request.</p>
 
 	<h2 class="text-xl font-bold mb-2">User rights</h2>
-	<p class="mb-4">Users have the right to access, correct or delete their personal data at any time. This can be done through the LFGameSync website or by opening a ticket on the <a href="https://discord.gg/ZhC4JVFFUV">LFGameSync Discord Support Server</a>.</p>
+	<p class="mb-4">Users have the right to access, correct or delete their personal data at any time. This can be done through the LFGameSync website or by opening a ticket on the <a href="https://discord.gg/ZhC4JVFFUV" class="text-gray-500 underline">LFGameSync Discord Support Server</a>.</p>
 
 	<h2 class="text-xl font-bold mb-2">Cookie usage</h2>
 	<p class="mb-4">Cookies are used to store login sessions and are required for site functionality. No user tracking takes place.</p>
 
 	<h2 class="text-xl font-bold mb-2">How to opt out</h2>
-	<p class="mb-4">To opt out of all data collection and use, open a ticket on the <a href="https://discord.gg/ZhC4JVFFUV">LFGameSync Discord Support Server</a> and request account deletion.</p>
+	<p class="mb-4">To opt out of all data collection and use, open a ticket on the <a href="https://discord.gg/ZhC4JVFFUV" class="text-gray-500 underline">LFGameSync Discord Support Server</a> and request account deletion.</p>
 
 	<h2 class="text-xl font-bold mb-2">Contacting us</h2>
-	<p class="mb-4">If you have any questions about this privacy policy or wish to exercise any of your rights, please open a ticket on the <a href="https://discord.gg/ZhC4JVFFUV">LFGameSync Discord Support Server</a></p>
+	<p class="mb-4">If you have any questions about this privacy policy or wish to exercise any of your rights, please open a ticket on the <a href="https://discord.gg/ZhC4JVFFUV" class="text-gray-500 underline">LFGameSync Discord Support Server</a></p>
 	<p class="mb-4">While we encourage all communication to take place through the Discord server as previously outlined, UK GDPR law requires we provide a means to directly contact the data controller. This can be done by DMing Vulps23 on Discord, or by emailing webmaster@ajmcallister.co.uk (Note that messages recieved via Discord will likely have a faster response time)</p>
 
 	<h2 class="text-xl font-bold mb-2">Disclaimer</h2>
