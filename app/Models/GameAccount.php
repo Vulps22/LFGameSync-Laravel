@@ -33,4 +33,6 @@ class GameAccount extends Model
 			$this->save();
 		}
 	}
+
+	
 }
