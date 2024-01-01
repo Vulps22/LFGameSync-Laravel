@@ -152,6 +152,9 @@ class User extends Model implements AuthenticatableContract
 
 	public function syncGames($type = null)
 	{
+
+		$this->linkedAccounts->isSyncing();
+
 		if (!$type) {
 			//sync all game libraries
 			$this->syncSteamGames();
@@ -165,6 +168,8 @@ class User extends Model implements AuthenticatableContract
 		}
 
 		DiscordController::setStat("games", Game::count());
+		$this->linkedAccounts->isSyncing(false);
+		
 	}
 
 	public function syncSteamGames()
