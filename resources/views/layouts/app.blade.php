@@ -37,7 +37,7 @@
 	</div>
 	<footer class="py-4 text-center bg-gray-900 text-white">
 		<div class="flex justify-center items-center h-full">
-			<p class="mr-4">&copy; {{ date('Y') }} LFGameSync</p>
+			<p class="mr-4">&copy; 2023-{{ date('Y') }} LFGameSync</p>
 			<a href="{{ route('privacy') }}" class="mr-4">Privacy Policy</a>
 			@if(!isset($_COOKIE['accept_cookies']))
 			<div class="cookie-popup bg-gray-800 rounded-md p-4">
