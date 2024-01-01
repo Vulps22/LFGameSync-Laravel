@@ -161,7 +161,7 @@ class User extends Model implements AuthenticatableContract
 		return $query->leftJoin('game_accounts', 'users.id', '=', 'game_accounts.user_id')
 			->where(function ($query) {
 				// Select users that need syncing
-				$query->whereDoesntHave('game_accounts', function ($query) {
+				$query->whereDoesntHave('linkedAccounts', function ($query) {
 					// Ensure the last sync is more than 24 hours ago or has never been synced
 					$query->whereNull('last_sync')->orWhere('last_sync', '<', now()->subHours(24));
 				});
