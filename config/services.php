@@ -38,7 +38,9 @@ return [
         'stat_servers_id' => env('STAT_SERVERS'),
         'stat_users_id' => env('STAT_USERS'),
         'stat_games_id' => env('STAT_GAMES'),
-        
+        'webhook_error' => env('WEBHOOK_DISCORD_ERROR'),
+        'webhook_log' => env('WEBHOOK_DISCORD_LOG'),
+        'webhook_sync' => env('WEBHOOK_DISCORD_SYNC'),
 	],
 
 	'steam_api_key' => env('STEAM_API_KEY'),

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\DiscordController;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -28,16 +29,17 @@ class SyncGameLibraries implements ShouldQueue
 
     public function handle()
     {
+        DiscordController::sendMessage('sync', "Starting Hourly Sync Job");
         // Get users to sync
         $users = User::needsSyncing()->get();
 
+        DiscordController::sendMessage('sync', "Syncing {{count($users)}} Users");
+        
         // Sync each user
         foreach ($users as $user) {
             $user->syncGames();
-
-            // Handle errors
-
-            // Update last sync timestamp
         }
+
+        DiscordController::sendMessage('sync', "Successfully Synced {{count($users)}} users");
     }
 }
