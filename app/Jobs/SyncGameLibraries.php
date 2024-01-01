@@ -35,6 +35,7 @@ class SyncGameLibraries implements ShouldQueue
 
             // Get users to sync
             $users = User::needsSyncing()->get();
+            dd($users);
             $userCount = count($users);
             DiscordController::sendMessage('sync', "Syncing $userCount Users");
 

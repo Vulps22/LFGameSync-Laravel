@@ -166,7 +166,7 @@ class User extends Model implements AuthenticatableContract
 					$query->whereNull('last_sync')->orWhere('last_sync', '<', now()->subHours(24));
 				});
 			})->orderBy('game_accounts.last_sync') // Order by the oldest last_sync in game_accounts
-			->take($usersToSync)->get();
+			->take($usersToSync);
 	}
 
 
