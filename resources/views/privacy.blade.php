@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8 text-gray-400">
 	<h1 class="text-3xl font-bold mb-4">Privacy Policy</h1>
 	<p class="mb-4">This privacy policy outlines how LFGameSync uses and protects any personal data collected from users.</p>
 
