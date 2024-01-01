@@ -158,14 +158,14 @@ class User extends Model implements AuthenticatableContract
 		$usersToSync = intval($this->count() / 24);
 		if ($usersToSync < 10) $usersToSync = 10;
 
-		return $query->leftJoin('linkedAccounts', 'users.id', '=', 'linkedAccounts.user_id')
+		return $query->leftJoin('game_accounts', 'users.id', '=', 'game_accounts.user_id')
 			->where(function ($query) {
 				// Select users that need syncing
-				$query->whereDoesntHave('linkedAccounts', function ($query) {
+				$query->whereDoesntHave('game_accounts', function ($query) {
 					// Ensure the last sync is more than 24 hours ago or has never been synced
 					$query->whereNull('last_sync')->orWhere('last_sync', '<', now()->subHours(24));
 				});
-			})->orderBy('linkedAccounts.last_sync') // Order by the oldest last_sync in linkedAccounts
+			})->orderBy('game_accounts.last_sync') // Order by the oldest last_sync in game_accounts
 			->take($usersToSync);
 	}
 
