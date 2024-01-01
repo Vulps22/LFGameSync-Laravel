@@ -35,8 +35,8 @@ class SyncGameLibraries implements ShouldQueue
 
             // Get users to sync
             $users = User::needsSyncing()->get();
-            dd($users);
             $userCount = count($users);
+
             DiscordController::sendMessage('sync', "Syncing $userCount Users");
 
             // Sync each user
@@ -44,7 +44,7 @@ class SyncGameLibraries implements ShouldQueue
                 $user->syncGames();
             }
 
-            DiscordController::sendMessage('sync', "Successfully Synced $userCount users");
+            DiscordController::sendMessage('sync', "Sync Complete");
         } catch (Exception $e) {
             DiscordController::sendMessage('error', "Error while running Hourly Sync: \n {{$e->getMessage()}}");
             DiscordController::sendMessage('sync', "Hourly Sync Failed! An Exception was caught");
