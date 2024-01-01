@@ -156,15 +156,16 @@ class User extends Model implements AuthenticatableContract
 	{
 		// Calculate the fraction of users to sync based on the last 24 hours
 		$usersToSync = intval($this->count() / 24);
-		if($usersToSync < 10) $usersToSync = 10;
+		if ($usersToSync < 10) $usersToSync = 10;
 
-		return $query->where(function ($query) use ($usersToSync) {
-			// Select users that need syncing
-			$query->whereDoesntHave('linkedAccounts', function ($query) {
-				// Ensure the last sync is more than 24 hours ago or has never been synced
-				$query->whereNull('last_sync')->orWhere('last_sync', '<', now()->subHours(24));
-			});
-		})->oldest('linkedAccounts.last_sync') // Order by the oldest last_sync in linkedAccounts
+		return $query->leftJoin('linkedAccounts', 'users.id', '=', 'linkedAccounts.user_id')
+			->where(function ($query) {
+				// Select users that need syncing
+				$query->whereDoesntHave('linkedAccounts', function ($query) {
+					// Ensure the last sync is more than 24 hours ago or has never been synced
+					$query->whereNull('last_sync')->orWhere('last_sync', '<', now()->subHours(24));
+				});
+			})->orderBy('linkedAccounts.last_sync') // Order by the oldest last_sync in linkedAccounts
 			->take($usersToSync);
 	}
 
