@@ -15,7 +15,7 @@ class AccountsController extends Controller
 
         if(!$discordId) return "Discord ID Missing";
 
-        $user = User::firstOrCreate(['discord_id' => $discordId]);
+        $user = User::firstOrCreate(['discord_id' => $discordId, 'discord_name' => '']);
         if(!$user->exists()) $user->save();
 
         $token = hash('sha256', $discordId . now());
