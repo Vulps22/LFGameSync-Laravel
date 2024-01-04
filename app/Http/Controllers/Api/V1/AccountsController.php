@@ -30,7 +30,7 @@ class AccountsController extends Controller
         $link->token = $token;
         $link->expires = now()->addMinutes(15);
         $link->save();
-
+        
         return response()->json([
             'token' => $token
         ]);
