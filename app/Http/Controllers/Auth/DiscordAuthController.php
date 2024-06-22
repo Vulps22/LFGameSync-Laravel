@@ -26,7 +26,10 @@ class DiscordAuthController extends Controller
 
 		DiscordController::sendMessage("log", "Cookie Login Begin");
 		//check if user is already logged in
-		if (Auth::check()) return redirect('/dashboard');
+		if (Auth::check()){
+			DiscordController::sendMessage("log", "Already Logged In Redirecting to Dashboard");
+			return redirect('/dashboard');
+		}
 		
 		//if user has the cookie try to log them in
 		$discordToken = Cookie::get('discord_token');
