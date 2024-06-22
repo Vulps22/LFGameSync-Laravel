@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
-use App\Http\Controllers\Auth\DiscordController;
+use App\Http\Controllers\Auth\DiscordAuthController;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use ReflectionClass;
 use Tests\TestCase;
@@ -54,7 +54,7 @@ class DiscordControllerTest extends TestCase
 		]);
 	
 		// Create an instance of the DiscordController class
-		$controller = new DiscordController();
+		$controller = new DiscordAuthController();
 	
 		// Use reflection to access the private validateToken() method
 		$class = new ReflectionClass($controller);
