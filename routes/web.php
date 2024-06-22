@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SteamController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Auth\DiscordController;
+use App\Http\Controllers\Auth\DiscordAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountLinking;
 
@@ -26,8 +26,8 @@ Route::get('/link/steam/callback', [SteamController::class, 'handleSteamCallback
 
 // routes/web.php
 
-Route::get('/login', [DiscordController::class, 'doLogin'])->name('discord.login');
-Route::get('/login/callback', [DiscordController::class, 'handleDiscordCallback'])->name('discord.callback');
+Route::get('/login', [DiscordAuthController::class, 'doLogin'])->name('discord.login');
+Route::get('/login/callback', [DiscordAuthController::class, 'handleDiscordCallback'])->name('discord.callback');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

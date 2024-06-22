@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
 	public function index()
 	{
-		if (Cookie::get('discord_token')) return redirect('/login');
+		//if (Cookie::get('discord_token')) return redirect('/login');
 
 		//count how many servers are in the database
 		$discordCount = DiscordServer::count();

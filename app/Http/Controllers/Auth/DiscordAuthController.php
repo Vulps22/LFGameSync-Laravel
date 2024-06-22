@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Helpers\DiscordAPI;
+use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\Controller;
 use App\Models\GameAccount;
 use App\Models\User;
@@ -10,12 +11,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
+/**
+ * This controller handles user authentication via Discord for the application. 
+ * It manages the login process, redirects to Discord for authentication, handles 
+ * the callback from Discord, and manages tokens (access and refresh tokens) for user sessions. 
+ * It includes methods for validating tokens, logging in with cookies, and refreshing tokens.
+*/
 
-class DiscordController extends Controller
+class DiscordAuthController extends Controller
 {
 
 	public function doLogin()
 	{
+
+		$this->sendMessage("log", "Cookie Login Begin");
 		//check if user is already logged in
 		if (Auth::check()) return redirect('/dashboard');
 		
@@ -23,9 +32,11 @@ class DiscordController extends Controller
 		$discordToken = Cookie::get('discord_token');
 		if ($discordToken) {
 			if ($this->cookieLogin()) {
+				$this->sendMessage("log", "Cookie Login Success");
+
 				return redirect('/dashboard');
 			}
-
+			$this->sendMessage("log", "Cookie Was Found but Login Failed");
 			Cookie::queue(Cookie::forget('discord_token'));
 			$response = redirect('/');
 			return $response;

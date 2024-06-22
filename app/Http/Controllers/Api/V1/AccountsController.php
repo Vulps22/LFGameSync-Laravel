@@ -24,7 +24,7 @@ class AccountsController extends Controller
             $user->save();
         }
 
-        $token = hash('sha256', $discordId . now());
+        $token = hash('sha256', $discordId . now() . random_bytes(16));
 
         $link = LinkToken::firstOrNew([
             'user_id' => $user->id

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/**
+ * This controller handles interactions with the Discord API for the application.
+ * It provides functions to rename Discord channels, set various statistics (servers, users, games) 
+ * as channel names, and send messages to specified Discord channels using webhooks.
+*/
+
 
 class DiscordController extends Controller
 {
