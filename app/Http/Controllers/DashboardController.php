@@ -27,8 +27,8 @@ class DashboardController extends Controller
 
     if (auth()->user()->isTokenLogin) {
         // Debugging: User is a token login
-        DiscordController::sendMessage("log", "User is token login, redirecting to '/'");
-        return redirect('/');
+        DiscordController::sendMessage("log", "User is token login, redirecting to '/' (redirect disabled in code)");
+        //return redirect('/link');
     }
 
     // Debugging: User is not a token login
