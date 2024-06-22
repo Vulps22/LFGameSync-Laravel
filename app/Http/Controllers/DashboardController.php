@@ -12,22 +12,55 @@ class DashboardController extends Controller
 
 
 	public function index()
-	{
-		if (!auth()->check()) return redirect('/');
-		if(auth()->user()->isTokenLogin) return redirect('/');
-		$this->syncDiscordServers();
+{
+    // Debugging: Initial entry
+    DiscordController::sendMessage("log", "Entering index method");
 
-		$userId = auth()->user()->id;
-		$discordUserServers = DiscordServerUser::where('user_id', $userId)
-			->join('discord_servers', 'discord_server_users.server_id', '=', 'discord_servers.id')
-			->orderBy('discord_servers.name', 'asc')
-			->get();
+    if (!auth()->check()) {
+        // Debugging: Auth check failed
+        DiscordController::sendMessage("log", "User has failed auth->check()");
+        return redirect('/');
+    }
 
-		return view('dashboard', [
-			'user' => auth()->user(),
-			'discordServers' => $discordUserServers,
-		]);
-	}
+    // Debugging: Auth check passed
+    DiscordController::sendMessage("log", "User passed auth->check()");
+
+    if (auth()->user()->isTokenLogin) {
+        // Debugging: User is a token login
+        DiscordController::sendMessage("log", "User is token login, redirecting to '/'");
+        return redirect('/');
+    }
+
+    // Debugging: User is not a token login
+    DiscordController::sendMessage("log", "User is not token login");
+
+    // Debugging: Starting syncDiscordServers
+    DiscordController::sendMessage("log", "Starting syncDiscordServers");
+    $this->syncDiscordServers();
+    // Debugging: Finished syncDiscordServers
+    DiscordController::sendMessage("log", "Finished syncDiscordServers");
+
+    $userId = auth()->user()->id;
+
+    // Debugging: Retrieving discord servers for user
+    DiscordController::sendMessage("log", "Retrieving discord servers for user ID: " . $userId);
+    $discordUserServers = DiscordServerUser::where('user_id', $userId)
+        ->join('discord_servers', 'discord_server_users.server_id', '=', 'discord_servers.id')
+        ->orderBy('discord_servers.name', 'asc')
+        ->get();
+
+    // Debugging: Retrieved discord servers
+    DiscordController::sendMessage("log", "Retrieved discord servers for user ID: " . $userId);
+
+    // Debugging: Returning view
+    DiscordController::sendMessage("log", "Returning dashboard view for user ID: " . $userId);
+
+    return view('dashboard', [
+        'user' => auth()->user(),
+        'discordServers' => $discordUserServers,
+    ]);
+}
+
 
 	public static function syncDiscordServers()
 	{
