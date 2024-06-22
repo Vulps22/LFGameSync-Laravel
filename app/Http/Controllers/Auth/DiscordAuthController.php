@@ -24,7 +24,7 @@ class DiscordAuthController extends Controller
 	public function doLogin()
 	{
 
-		$this->sendMessage("log", "Cookie Login Begin");
+		DiscordController::sendMessage("log", "Cookie Login Begin");
 		//check if user is already logged in
 		if (Auth::check()) return redirect('/dashboard');
 		
@@ -32,11 +32,11 @@ class DiscordAuthController extends Controller
 		$discordToken = Cookie::get('discord_token');
 		if ($discordToken) {
 			if ($this->cookieLogin()) {
-				$this->sendMessage("log", "Cookie Login Success");
+				DiscordController::sendMessage("log", "Cookie Login Success");
 
 				return redirect('/dashboard');
 			}
-			$this->sendMessage("log", "Cookie Was Found but Login Failed");
+			DiscordController::sendMessage("log", "Cookie Was Found but Login Failed");
 			Cookie::queue(Cookie::forget('discord_token'));
 			$response = redirect('/');
 			return $response;
