@@ -18,10 +18,13 @@ class AccountsController extends Controller
         if(!$discordId) return "Discord ID Missing";
 
         $user = User::firstOrNew(['discord_id' => $discordId]);
+
         if(!$user->exists) {
             DiscordController::sendMessage("log", "A new user is being created with a link token");
-            $user->discord_name = 'token';
+            $user->isTokenLogin = false;
+            $user->discord_name = $user->discordUser()['username'];            
             $user->save();
+            
         }
 
         $token = hash('sha256', $discordId . now() . random_bytes(16));
