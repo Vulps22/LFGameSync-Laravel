@@ -29,7 +29,6 @@ Route::get('/link/steam/callback', [SteamController::class, 'handleSteamCallback
 Route::get('/login', [DiscordAuthController::class, 'doLogin'])->name('discord.login');
 Route::get('/login/callback', [DiscordAuthController::class, 'handleDiscordCallback'])->name('discord.callback');
 
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/link', [AccountLinking::class, 'index'])->name('account.links');

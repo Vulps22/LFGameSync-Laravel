@@ -42,58 +42,38 @@ class DiscordAPI
 	}
 
 	public static function getUserById($id)
-	{
+{
+    // Retrieve the bot token from the configuration
+    $token = config('services.discord')['bot_token'];
+    
+    // Define the Discord API URL for fetching user details
+    $url = "https://discord.com/api/users/$id";
+    
+    try {
+        // Send an HTTP GET request to the Discord API using the Laravel HTTP client
+        $response = Http::withHeaders([
+            'Authorization' => "Bot $token",
+        ])->get($url);
 
-		$token = config('services.discord')['bot_token'];
-		/*
-		$response = Http::withHeaders([
-				'Authorization' => "$token"
-			])->get("https://discord.com/api/users/$id");
-			dump($response->headers());
-			error_log(json_encode($response->json()));
-			dd($response->json());
-			*/
+        // Check if the response is successful
+        if ($response->successful()) {
+            // Log the response for debugging purposes (optional)
+            error_log(json_encode($response->json()));
 
-		$url = "https://discord.com/api/users/$id";
+            // Return the JSON-decoded response data
+            return $response->json();
+        } else {
+            // Handle the case where the response was not successful
+            error_log("Error fetching user data: " . $response->status());
+            return null; // or handle the error as needed
+        }
+    } catch (\Exception $e) {
+        // Log any exceptions that occur during the API request
+        error_log("Exception occurred: " . $e->getMessage());
+        return null; // or handle the exception as needed
+    }
+}
 
-		// Create cURL session
-		$ch = curl_init($url);
-
-		// Set cURL options
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			'Authorization: Bot ' . $token,
-		]);
-		// Execute cURL session and get the result
-		//$response = curl_exec($ch);
-
-		// Check for cURL errors
-		if (curl_errno($ch)) {
-			echo 'cURL error: ' . curl_error($ch);
-		}
-
-		// Close cURL session
-		curl_close($ch);
-
-		$response = '{
-			"id": "914368203482890240",
-			"username": "vulps23",
-			"avatar": "551710b555740ac583bd9d63009fcb65",
-			"discriminator": "0",
-			"public_flags": 4194368,
-			"premium_type": 2,
-			"flags": 4194368,
-			"banner": "a_e4a2709878c11008cf7ee192ea5c2069",
-			"accent_color": 7812399,
-			"global_name": "Vulps",
-			"avatar_decoration_data": null,
-			"banner_color": "#77352f"
-		  }
-		  ';
-		//dd(json_decode($response, true));
-		return json_decode($response, true);
-	}
 
 	public static function refreshToken($refreshToken)
 	{
