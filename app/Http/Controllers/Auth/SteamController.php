@@ -23,7 +23,7 @@ class SteamController extends Controller
     }
 
     $steamOpenId = 'https://steamcommunity.com/openid/login';
-    $returnToUrl = route('steam.callback');
+    $returnToUrl = route('steam.callback', ['token' => $token]);
 
     // Include the token in the state parameter
     $params = [
@@ -43,7 +43,7 @@ class SteamController extends Controller
 public function handleSteamCallback(Request $request)
 {
     // Retrieve the state parameter (which contains the token)
-    $token = $request->input('openid.state');
+    $token = $request->query('token');
     error_log("1");
     if (!$token) {
         return redirect('/link')->with('error', 'Invalid Steam login attempt.');
