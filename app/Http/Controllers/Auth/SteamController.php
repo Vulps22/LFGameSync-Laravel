@@ -46,7 +46,7 @@ public function handleSteamCallback(Request $request)
     $token = $request->input('openid.state');
     error_log("1");
     if (!$token) {
-        return redirect('/login')->with('error', 'Invalid Steam login attempt.');
+        return redirect('/link')->with('error', 'Invalid Steam login attempt.');
     }
 	error_log("2");
     // Find the corresponding LinkToken
@@ -54,14 +54,14 @@ public function handleSteamCallback(Request $request)
     error_log("3");
     if (!$linkToken || $linkToken->isExpired()) {
 		error_log("4");
-        return redirect('/login')->with('error', 'The token is invalid or has expired.');
+        return redirect('/link')->with('error', 'The token is invalid or has expired.');
     }
 
     $steamId = $this->validateSteamCallback($request);
 	error_log("5");
     if (!$steamId) {
 		error_log("6");
-		return redirect('/login')->with('error', 'Steam authentication validation failed.');
+		return redirect('/link')->with('error', 'Steam authentication validation failed.');
     }
 	error_log("7");
     // Link Steam ID to the user associated with the token
