@@ -57,8 +57,7 @@ class DiscordAPI
 
         // Check if the response is successful
         if ($response->successful()) {
-            // Log the response for debugging purposes (optional)
-            error_log(json_encode($response->json()));
+
 
             // Return the JSON-decoded response data
             return $response->json();

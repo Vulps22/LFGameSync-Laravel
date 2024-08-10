@@ -53,14 +53,12 @@ public function handleSteamCallback(Request $request)
     $linkToken = LinkToken::where('token', $token)->first();
 
 	if (!$linkToken || $linkToken->isExpired()) {
-		error_log("4");
-        return redirect('/link')->with('error', 'The token is invalid or has expired.');
+		return redirect('/link')->with('error', 'The token is invalid or has expired.');
     }
 
     $steamId = $this->validateSteamCallback($request);
 
 	if (!$steamId) {
-		error_log("6");
 		return redirect('/link')->with('error', 'Steam authentication validation failed.');
     }
 
