@@ -4,54 +4,78 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\GameAccount;
+use App\Models\LinkToken;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class SteamController extends Controller
 {
 
 	public function redirectToSteam()
-	{
-		$steamOpenId = 'https://steamcommunity.com/openid/login';
-		$returnToUrl = route('steam.callback');
+{
+    // Get the token from the request or session
+    $token = request()->get('token') ?? Cookie::get('oneTimeToken');
+    
+    if (!$token) {
+        return redirect('/link')->withErrors('Token is required for Steam login.');
+    }
 
-		$params = [
-			'openid.ns'         => 'http://specs.openid.net/auth/2.0',
-			'openid.mode'       => 'checkid_setup',
-			'openid.return_to'  => $returnToUrl,
-			'openid.realm'      => url('/'),
-			'openid.identity'   => 'http://specs.openid.net/auth/2.0/identifier_select',
-			'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
-		];
+    $steamOpenId = 'https://steamcommunity.com/openid/login';
+    $returnToUrl = route('steam.callback');
 
-		return redirect($steamOpenId . '?' . http_build_query($params));
-	}
+    // Include the token in the state parameter
+    $params = [
+        'openid.ns'         => 'http://specs.openid.net/auth/2.0',
+        'openid.mode'       => 'checkid_setup',
+        'openid.return_to'  => $returnToUrl,
+        'openid.realm'      => url('/'),
+        'openid.identity'   => 'http://specs.openid.net/auth/2.0/identifier_select',
+        'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
+        'openid.state'      => $token, // Pass the token here
+    ];
 
-	public function handleSteamCallback(Request $request)
-	{
-		if (!$request->has('openid_assoc_handle')) {
-			// Handle authentication failure
-			return redirect('/login')->with('error', 'Steam authentication failed.');
-		}
+    return redirect($steamOpenId . '?' . http_build_query($params));
+}
 
 
+public function handleSteamCallback(Request $request)
+{
+    // Retrieve the state parameter (which contains the token)
+    $token = $request->input('openid.state');
+    
+    if (!$token) {
+        return redirect('/login')->with('error', 'Invalid Steam login attempt.');
+    }
 
-		$steamId = $this->validateSteamCallback($request);
-		if (!$steamId) {
-			// Handle validation failure
-			return redirect('/login')->with('error', 'Steam authentication validation failed.');
-		}
+    // Find the corresponding LinkToken
+    $linkToken = LinkToken::where('token', $token)->first();
+    
+    if (!$linkToken || $linkToken->isExpired()) {
+        return redirect('/login')->with('error', 'The token is invalid or has expired.');
+    }
 
-		//add Steam ID to authenticated user
-		$user = User::find(auth()->user()->id);
-		$accounts = GameAccount::where('user_id', $user->id)->first();
-		$accounts->steam_id = $steamId;
-		$accounts->save();
+    $steamId = $this->validateSteamCallback($request);
+    if (!$steamId) {
+        return redirect('/login')->with('error', 'Steam authentication validation failed.');
+    }
 
-		if(auth()->user()->isTokenLogin) return redirect('/link');
+    // Link Steam ID to the user associated with the token
+    $user = User::find($linkToken->user_id);
+    $accounts = GameAccount::firstOrCreate(['user_id' => $user->id]);
+    $accounts->steam_id = $steamId;
+    $accounts->save();
 
-		return redirect('/dashboard'); // Redirect after successful login
-	}
+    Auth::login($user); // Log in the user
+
+    // Optionally delete or invalidate the token after use
+    $linkToken->delete();
+
+
+    return redirect('/link'); // Redirect after successful login
+}
+
 
 	protected function validateSteamCallback(Request $request)
 	{
