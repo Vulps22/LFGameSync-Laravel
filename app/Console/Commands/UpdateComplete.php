@@ -55,6 +55,8 @@ class UpdateComplete extends Command
 
         // Notify via Discord
         DiscordController::sendMessage('error', "Updated to {$newVersion}");
+        DiscordController::sendMessage('log', "Updated to {$newVersion}");
+
 
         // Output success message to the console
         $this->info("Updated to version {$newVersion}");
