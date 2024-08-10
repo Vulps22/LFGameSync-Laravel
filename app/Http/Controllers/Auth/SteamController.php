@@ -44,33 +44,38 @@ public function handleSteamCallback(Request $request)
 {
     // Retrieve the state parameter (which contains the token)
     $token = $request->input('openid.state');
-    
+    error_log("1");
     if (!$token) {
         return redirect('/login')->with('error', 'Invalid Steam login attempt.');
     }
-
+	error_log("2");
     // Find the corresponding LinkToken
     $linkToken = LinkToken::where('token', $token)->first();
-    
+    error_log("3");
     if (!$linkToken || $linkToken->isExpired()) {
+		error_log("4");
         return redirect('/login')->with('error', 'The token is invalid or has expired.');
     }
 
     $steamId = $this->validateSteamCallback($request);
+	error_log("5");
     if (!$steamId) {
-        return redirect('/login')->with('error', 'Steam authentication validation failed.');
+		error_log("6");
+		return redirect('/login')->with('error', 'Steam authentication validation failed.');
     }
-
+	error_log("7");
     // Link Steam ID to the user associated with the token
     $user = User::find($linkToken->user_id);
+	error_log("8");
     $accounts = GameAccount::firstOrCreate(['user_id' => $user->id]);
+	error_log("9");
     $accounts->steam_id = $steamId;
+	error_log("10");
     $accounts->save();
 
+error_log("11");
     Auth::login($user); // Log in the user
-
-    // Optionally delete or invalidate the token after use
-    $linkToken->delete();
+	error_log("12");
 
 
     return redirect('/link'); // Redirect after successful login
