@@ -12,11 +12,13 @@
 			<i class="fa-solid fa-robot"></i>
 			Get the Bot
 		</button>
+		<!--
 		<button style="width:14rem" class="bg-white text-indigo-500 px-6 py-3 rounded-full mt-8" onclick="window.location.href='/login'">
 			<i class="fa-brands fa-discord"></i>
 			Sign In with Discord
 		</button>
-		
+-->
+
 	</div>
 </header>
 
@@ -88,9 +90,15 @@
 <section class="bg-indigo-500 py-16">
 	<div class="max-w-3xl mx-auto text-center">
 		<h3 class="text-3xl text-white font-bold">Link your accounts now!</h3>
+		<!--
 		<button class="bg-white text-indigo-500 px-6 py-3 rounded-full mt-8" onclick="window.location.href='/login'">
 			<i class="fa-brands fa-discord"></i>
 			Sign In with Discord
+		</button>
+-->
+		<button style="width:14rem" class="bg-white text-indigo-500 px-6 py-3 rounded-full mt-8 sm:mr-4" onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=1137177567745548318&permissions=0&scope=bot'">
+			<i class="fa-solid fa-robot"></i>
+			Get the Bot
 		</button>
 	</div>
 </section>
