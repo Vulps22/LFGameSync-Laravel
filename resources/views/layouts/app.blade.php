@@ -39,7 +39,7 @@
 		<div class="flex justify-center items-center h-full">
 			<p class="mr-4">&copy; 2023-{{ date('Y') }} LFGameSync</p>
 			<a href="{{ route('privacy') }}" class="mr-4">Privacy Policy</a>
-			<a href="{{ route('terms') }}" class="mr-4">Privacy Policy</a>
+			<a href="{{ route('terms') }}" class="mr-4">Terms & Conditionsy</a>
 			@if(!isset($_COOKIE['accept_cookies']))
 			<div class="cookie-popup bg-gray-800 rounded-md p-4">
 				<p class="mb-2">We use cookies for essential functions only. By using our site, you consent to our use of cookies.</p>
