@@ -22,7 +22,7 @@ class AccountsController extends Controller
         if(!$user->exists) {
             DiscordController::sendMessage("log", "A new user is being created with a link token");
             $user->isTokenLogin = false;
-            $user->discord_name = $user->discordUser()['username'];            
+            $user->discord_name = $user->discordUser()['username'] ?? ' ';            
             $user->save();
             
         }

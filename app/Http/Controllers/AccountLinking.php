@@ -41,6 +41,8 @@ class AccountLinking extends Controller
             abort(401);
         }
 
+        $this->token->user->discord_name = $this->token->user->discordUser()['username'];
+        $this->token->user->save();
         Cookie::queue(Cookie::make('oneTimeToken', $token, 15));
         Auth::user()->isTokenLogin = false;
     }
