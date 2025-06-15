@@ -20,4 +20,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           script: |
-            'cd /var/www/html/lfgamesync-co-uk && git fetch && git pull
+            'cd /var/www/html/lfgamesync-co-uk && git fetch && git pull'
