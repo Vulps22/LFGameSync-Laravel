@@ -18,6 +18,6 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          username: ${{ secrets.SSH_USER }}
           script: |
             'cd /var/www/html/lfgamesync-co-uk && git fetch && git pull
