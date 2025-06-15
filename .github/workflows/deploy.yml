@@ -8,16 +8,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install SSH Key
+      - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            'cd /var/www/html/lfgamesync-co-uk && git fetch && git pull'
+            cd /var/www/html/lfgamesync-co-uk
+            git fetch origin main
+            git reset --hard origin/main
