@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LFGameSync - Find Your Gaming Crew, Faster</title>
-    <meta name="description" content="LFGameSync is a Discord bot that scans your members' game libraries so you can instantly see who plays what. The easiest way to find your next game night.">
-    
+    <meta name="description" content="LFGameSync is a Discord bot that scans your members' game libraries...">
+    <meta name="author" content="Vulps Development">
+    <meta name="theme-color" content="#0F172A"> <!-- This is Tailwind's slate-900 color -->
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="LFGameSync - Find Your Gaming Crew, Faster">
+    <meta property="og:site_name" content="LFGameSync">
+    <meta property="og:description"
+        content="LFGameSync is a Discord bot that scans your members' game libraries so you can instantly see who plays what. The easiest way to find your next game night.">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lfgamesync.co.uk/img/lfg_post.png">
+    <meta property="og:url" content="https://lfgamesync.co.uk">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LFGameSync - Find Your Gaming Crew, Faster">
+    <meta name="twitter:description" content="LFGameSync is a Discord bot that scans your members' game libraries...">
+    <meta name="twitter:image" content="https://lfgamesync.co.uk/img/lfg_post.png">
+
+    <link rel="apple-touch-icon" href="./img/lfgamesync-2.png">
+
     <!-- TailwindCSS CDN Script -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +37,8 @@
     <script src="https://kit.fontawesome.com/ac7deee7ba.js" crossorigin="anonymous"></script>
 
     <!-- Favicon Placeholder (replace with your actual favicon URL) -->
-    <link rel="icon" href="https://placehold.co/32x32/1E293B/FFFFFF?text=LFG" type="image/png">
-    
+    <link rel="icon" href="./img/lfgamesync-2.png" type="image/png">
+
     <!-- Basic Customizations -->
     <style>
         body {
@@ -27,6 +46,7 @@
         }
     </style>
 </head>
+
 <body class="bg-slate-900 text-slate-300 antialiased">
 
     <!-- Header & Navigation -->
@@ -36,11 +56,13 @@
                 LFGameSync
             </div>
             <div class="flex items-center gap-x-6">
-                 <a href="https://github.com/Vulps22/project-gamer" target="_blank" class="text-slate-400 hover:text-white transition-colors text-2xl">
+                <a href="https://github.com/Vulps22/project-gamer" target="_blank"
+                    class="text-slate-400 hover:text-white transition-colors text-2xl">
                     <i class="fa-brands fa-github"></i>
                 </a>
                 <!-- IMPORTANT: Replace YOUR_BOT_CLIENT_ID with your actual bot's client ID -->
-                <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318" class="inline-flex items-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20">
+                <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318"
+                    class="inline-flex items-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20">
                     <i class="fa-brands fa-discord mr-2"></i>
                     Add to Discord
                 </a>
@@ -56,11 +78,13 @@
                     Stop Guessing. <span class="text-blue-400">Start Gaming.</span>
                 </h1>
                 <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-400">
-                    LFGameSync scans your members' game libraries so you can instantly see who plays what. The easiest way to find your next game night, without the endless polls.
+                    LFGameSync scans your members' game libraries so you can instantly see who plays what. The easiest
+                    way to find your next game night, without the endless polls.
                 </p>
                 <div class="mt-10">
                     <!-- IMPORTANT: Replace YOUR_BOT_CLIENT_ID with your actual bot's client ID -->
-                    <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318" class="inline-flex items-center bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-500 transition-colors shadow-xl shadow-blue-600/30">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318"
+                        class="inline-flex items-center bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-500 transition-colors shadow-xl shadow-blue-600/30">
                         <i class="fa-brands fa-discord mr-3"></i>
                         Add to Discord
                     </a>
@@ -73,24 +97,27 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">Get Started in 3 Simple Steps</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">Designed to be powerful, yet incredibly simple to use.</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-400">Designed to be powerful, yet incredibly simple to
+                        use.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 text-center">
                     <!-- Step 1 -->
                     <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
                         <div class="text-blue-400 mb-4 text-5xl">
-                           <i class="fa-solid fa-layer-group"></i>
+                            <i class="fa-solid fa-layer-group"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-white">Build Your Library</h3>
-                        <p class="mt-2 text-slate-400">Users add games from Steam, GOG, and more with the simple `/library add` command.</p>
+                        <p class="mt-2 text-slate-400">Users add games from Steam, GOG, and more with the simple
+                            `/library add` command.</p>
                     </div>
                     <!-- Step 2 -->
                     <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
                         <div class="text-blue-400 mb-4 text-5xl">
-                           <i class="fa-solid fa-users"></i>
+                            <i class="fa-solid fa-users"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-white">Find Your Crew</h3>
-                        <p class="mt-2 text-slate-400">Use `/lfg <game>` to instantly find everyone in the server who owns that specific game.</p>
+                        <p class="mt-2 text-slate-400">Use `/lfg <game>` to instantly find everyone in the server who
+                                owns that specific game.</p>
                     </div>
                     <!-- Step 3 -->
                     <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
@@ -98,22 +125,27 @@
                             <i class="fa-solid fa-gamepad"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-white">Play Together</h3>
-                        <p class="mt-2 text-slate-400">The bot creates a clean post to gather your players and get the game started right away.</p>
+                        <p class="mt-2 text-slate-400">The bot creates a clean post to gather your players and get the
+                            game started right away.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- Register Any Game Section (Boxed) -->
         <section class="py-20">
             <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto bg-slate-800/80 rounded-xl p-8 md:p-12 border border-slate-700 grid md:grid-cols-2 gap-8 items-center">
+                <div
+                    class="max-w-4xl mx-auto bg-slate-800/80 rounded-xl p-8 md:p-12 border border-slate-700 grid md:grid-cols-2 gap-8 items-center">
                     <div class="md:pr-8">
                         <h3 class="text-2xl sm:text-3xl font-bold text-white">Register Any Game</h3>
-                        <p class="mt-4 text-slate-400">Can't find a game? Use the `/register` command with a store URL. We instantly recognize links from Steam, GOG, and Meta Quest. Other stores are sent for manual approval.</p>
+                        <p class="mt-4 text-slate-400">Can't find a game? Use the `/register` command with a store URL.
+                            We instantly recognize links from Steam, GOG, and Meta Quest. Other stores are sent for
+                            manual approval.</p>
                     </div>
                     <div>
-                        <div class="bg-slate-900 p-6 rounded-lg font-mono text-sm text-slate-400 border border-slate-700">
+                        <div
+                            class="bg-slate-900 p-6 rounded-lg font-mono text-sm text-slate-400 border border-slate-700">
                             <code><span class="text-green-400">/register</span> <span class="text-white">url:</span> <span class="text-amber-400">...</span></code><br>
                             <code class="pl-4 text-sky-400">> Game registered successfully!</code>
                             <br><br>
@@ -121,9 +153,10 @@
                             <code class="pl-4 text-sky-400">> Store not recognized. Submitted for approval.</code>
                         </div>
                         <div class="mt-4 flex items-center justify-center gap-x-4 text-slate-400">
-                           <i class="fa-brands fa-steam text-2xl"></i>
-                           <i class="fa-brands fa-meta text-2xl"></i>
-                           <span>GOG and more to come...<a href="#disclaimer" class="text-blue-400 hover:text-blue-300"><sup>1</sup></a></span>
+                            <i class="fa-brands fa-steam text-2xl"></i>
+                            <i class="fa-brands fa-meta text-2xl"></i>
+                            <span>GOG and more to come...<a href="#disclaimer"
+                                    class="text-blue-400 hover:text-blue-300"><sup>1</sup></a></span>
                         </div>
                     </div>
                 </div>
@@ -132,7 +165,7 @@
 
         <!-- Build Your Library Section (flat) -->
         <section class="py-20 bg-slate-800/50">
-             <div class="container mx-auto px-6">
+            <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
                     <div class="bg-slate-900 p-6 rounded-lg font-mono text-sm text-slate-400 border border-slate-700">
                         <code><span class="text-green-400">/library</span> <span class="text-white">add game:</span> <span class="text-amber-400">...</span></code><br>
@@ -140,19 +173,25 @@
                     </div>
                     <div class="md:pl-8">
                         <h3 class="text-2xl sm:text-3xl font-bold text-white">Build a Cross-Platform Library</h3>
-                        <p class="mt-4 text-slate-400">Once a game is in the bot's database, any user can add it to their personal library with `/library add`, specifying which store they own it on. This creates a unified view of your community's games, regardless of where they were purchased.</p>
+                        <p class="mt-4 text-slate-400">Once a game is in the bot's database, any user can add it to
+                            their personal library with `/library add`, specifying which store they own it on. This
+                            creates a unified view of your community's games, regardless of where they were purchased.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- Privacy Control Section (Boxed) -->
         <section class="py-20">
             <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto bg-slate-800/80 rounded-xl p-8 md:p-12 border border-slate-700 grid md:grid-cols-2 gap-8 items-center">
+                <div
+                    class="max-w-4xl mx-auto bg-slate-800/80 rounded-xl p-8 md:p-12 border border-slate-700 grid md:grid-cols-2 gap-8 items-center">
                     <div class="md:pr-8">
                         <h3 class="text-2xl sm:text-3xl font-bold text-white">Privacy and Control Included</h3>
-                        <p class="mt-4 text-slate-400">Your members are always in control. They can use `/sharing on` or `/sharing off` in each server, giving them granular control over where their game library is visible and ensuring their privacy is respected.</p>
+                        <p class="mt-4 text-slate-400">Your members are always in control. They can use `/sharing on` or
+                            `/sharing off` in each server, giving them granular control over where their game library is
+                            visible and ensuring their privacy is respected.</p>
                     </div>
                     <div class="bg-slate-900 p-6 rounded-lg font-mono text-sm text-slate-400 border border-slate-700">
                         <code><span class="text-green-400">/sharing</span> <span class="text-white">on</span></code><br>
@@ -167,14 +206,17 @@
 
         <!-- Choose Your Crew Section (flat) -->
         <section class="py-20 bg-slate-800/50">
-             <div class="container mx-auto px-6">
+            <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-                     <div>
-                        <img src="./img/player_select.png" alt="Example of the player selection dropdown" class="rounded-lg shadow-lg">
+                    <div>
+                        <img src="./img/player_select.png" alt="Example of the player selection dropdown"
+                            class="rounded-lg shadow-lg">
                     </div>
                     <div class="md:pl-8">
                         <h3 class="text-2xl sm:text-3xl font-bold text-white">Choose Your Crew</h3>
-                        <p class="mt-4 text-slate-400">The `/lfg` command presents you with a simple dropdown of every member in the server who owns the game and has sharing enabled. You can select specific people or send an open invitation to a role.</p>
+                        <p class="mt-4 text-slate-400">The `/lfg` command presents you with a simple dropdown of every
+                            member in the server who owns the game and has sharing enabled. You can select specific
+                            people or send an open invitation to a role.</p>
                     </div>
                 </div>
             </div>
@@ -183,13 +225,17 @@
         <!-- LFG Post Section (Boxed) -->
         <section class="py-20">
             <div class="container mx-auto px-6">
-                <div class="max-w-5xl mx-auto bg-slate-800/80 rounded-xl p-8 md:p-12 border border-slate-700 grid md:grid-cols-2 gap-8 items-center">
+                <div
+                    class="max-w-5xl mx-auto bg-slate-800/80 rounded-xl p-8 md:p-12 border border-slate-700 grid md:grid-cols-2 gap-8 items-center">
                     <div class="md:pr-8">
                         <h3 class="text-2xl sm:text-3xl font-bold text-white">The Perfect LFG Post</h3>
-                        <p class="mt-4 text-slate-400">The final post created by the bot is clean and effective. It tags the chosen players or role, shows the game's image, and includes links to all known store pages, making it easy for everyone to get on the same page.</p>
+                        <p class="mt-4 text-slate-400">The final post created by the bot is clean and effective. It tags
+                            the chosen players or role, shows the game's image, and includes links to all known store
+                            pages, making it easy for everyone to get on the same page.</p>
                     </div>
                     <div>
-                        <img src="./img/lfg_post.png" alt="Example of an LFG post created by the bot" class="rounded-lg shadow-lg">
+                        <img src="./img/lfg_post.png" alt="Example of an LFG post created by the bot"
+                            class="rounded-lg shadow-lg">
                     </div>
                 </div>
             </div>
@@ -202,26 +248,32 @@
         <div class="ml-3 mr-6 px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             <!-- Disclaimer -->
             <p id="disclaimer" class="md:col-span-4 text-xs text-slate-500 text-center md:text-left">
-               <sup>1</sup>LFGameSync and its developers are not affiliated with, endorsed by, or in any way officially connected with any of the supported stores. All product and company names are trademarks™ or registered® trademarks of their respective holders. We utilize publicly available data from their websites to provide functionality for the bot.
+                <sup>1</sup>LFGameSync and its developers are not affiliated with, endorsed by, or in any way officially
+                connected with any of the supported stores. All product and company names are trademarks™ or registered®
+                trademarks of their respective holders. We utilize publicly available data from their websites to
+                provide functionality for the bot.
             </p>
-            
+
             <!-- Centered Links -->
             <div class="md:col-span-4 md:col-start-5 text-center text-slate-400">
-                <p>&copy; 2025 LFGameSync. Built by <a href="https://vulps.co.uk" target="_blank" class="underline hover:text-white transition-colors">Vulps Development.</a></p>
+                <p>&copy; 2025 LFGameSync. Built by <a href="https://vulps.co.uk" target="_blank"
+                        class="underline hover:text-white transition-colors">Vulps Development.</a></p>
                 <div class="mt-4 flex justify-center items-center gap-x-6">
                     <!-- Replace # with your actual URLs -->
                     <a href="#" class="underline hover:text-white transition-colors">Privacy Policy</a>
                     <a href="#" class="underline hover:text-white transition-colors">Support Server</a>
-                    <a href="https://github.com/Vulps22/project-gamer" target="_blank" class="hover:text-white transition-colors text-lg">
+                    <a href="https://github.com/Vulps22/project-gamer" target="_blank"
+                        class="hover:text-white transition-colors text-lg">
                         <i class="fa-brands fa-github"></i>
                     </a>
                 </div>
             </div>
-            
+
             <!-- Spacer Column (empty) -->
             <div class="hidden md:block md:col-span-3"></div>
         </div>
     </footer>
-    
+
 </body>
+
 </html>
