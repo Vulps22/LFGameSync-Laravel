@@ -7,8 +7,7 @@
     <title>LFGameSync - Find Your Gaming Crew, Faster</title>
     <meta name="description" content="LFGameSync is a Discord bot that scans your members' game libraries...">
     <meta name="author" content="Vulps Development">
-    <meta name="theme-color" content="#0F172A"> <!-- This is Tailwind's slate-900 color -->
-    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0F172A"> <meta name="robots" content="index, follow">
 
     <meta property="og:title" content="LFGameSync - Find Your Gaming Crew, Faster">
     <meta property="og:site_name" content="LFGameSync">
@@ -25,21 +24,16 @@
 
     <link rel="apple-touch-icon" href="./img/lfgamesync-2.png">
 
-    <!-- TailwindCSS CDN Script -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome Kit -->
     <script src="https://kit.fontawesome.com/ac7deee7ba.js" crossorigin="anonymous"></script>
 
-    <!-- Favicon Placeholder (replace with your actual favicon URL) -->
     <link rel="icon" href="./img/lfgamesync-2.png" type="image/png">
 
-    <!-- Basic Customizations -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -49,29 +43,29 @@
 
 <body class="bg-slate-900 text-slate-300 antialiased">
 
-    <!-- Header & Navigation -->
     <header class="bg-slate-900/70 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold text-white tracking-tight">
                 LFGameSync
             </div>
-            <div class="flex items-center gap-x-6">
-                <a href="https://github.com/Vulps22/project-gamer" target="_blank"
+            <div class="flex items-center gap-x-4">  <a href="https://github.com/Vulps22/project-gamer" target="_blank"
                     class="text-slate-400 hover:text-white transition-colors text-2xl">
                     <i class="fa-brands fa-github"></i>
                 </a>
-                <!-- IMPORTANT: Replace YOUR_BOT_CLIENT_ID with your actual bot's client ID -->
+                <a href="https://discord.gg/PxjD25Cc85" class="inline-flex items-center bg-green-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-green-500 transition-colors shadow-lg shadow-green-600/20">
+                    <i class="fa-solid fa-users mr-2"></i>
+                    Join the Community
+                </a>
                 <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318"
                     class="inline-flex items-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20">
                     <i class="fa-brands fa-discord mr-2"></i>
-                    Add to Discord
+                    Add to Your Server
                 </a>
             </div>
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="py-24 sm:py-32">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight">
@@ -81,18 +75,31 @@
                     LFGameSync scans your members' game libraries so you can instantly see who plays what. The easiest
                     way to find your next game night, without the endless polls.
                 </p>
-                <div class="mt-10">
-                    <!-- IMPORTANT: Replace YOUR_BOT_CLIENT_ID with your actual bot's client ID -->
-                    <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318"
-                        class="inline-flex items-center bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-500 transition-colors shadow-xl shadow-blue-600/30">
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"> <a href="https://discord.com/oauth2/authorize?client_id=1137177567745548318"
+                        class="inline-flex items-center bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-500 transition-colors shadow-xl shadow-blue-600/30 w-full sm:w-auto">
                         <i class="fa-brands fa-discord mr-3"></i>
-                        Add to Discord
+                        Add Bot to Your Server
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- How It Works Section (Open) -->
+        <section class="pb-20 pt-10">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto bg-gradient-to-br from-green-600/20 to-slate-800/20 rounded-xl p-8 md:p-12 border border-green-500/30 text-center shadow-2xl shadow-green-600/10">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">Or, Join The Ultimate Gaming Hub</h2>
+                    <p class="mt-4 text-slate-300 max-w-2xl mx-auto">
+                        Ready to play now? Jump into the official LFGameSync community server—home to the largest collection of shared game libraries on Discord. It's the perfect place to find a game, test the bot's features, and connect with gamers instantly.
+                    </p>
+                    <div class="mt-8">
+                        <a href="https://discord.gg/PxjD25Cc85" class="inline-flex items-center bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition-colors shadow-xl shadow-green-600/30">
+                            <i class="fa-solid fa-users-rays mr-3"></i>
+                            Join The Official Server
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="how" class="py-20 bg-slate-800/50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -101,7 +108,6 @@
                         use.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <!-- Step 1 -->
                     <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
                         <div class="text-blue-400 mb-4 text-5xl">
                             <i class="fa-solid fa-layer-group"></i>
@@ -110,7 +116,6 @@
                         <p class="mt-2 text-slate-400">Users add games from Steam, GOG, and more with the simple
                             `/library add` command.</p>
                     </div>
-                    <!-- Step 2 -->
                     <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
                         <div class="text-blue-400 mb-4 text-5xl">
                             <i class="fa-solid fa-users"></i>
@@ -119,7 +124,6 @@
                         <p class="mt-2 text-slate-400">Use `/lfg <game>` to instantly find everyone in the server who
                                 owns that specific game.</p>
                     </div>
-                    <!-- Step 3 -->
                     <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg">
                         <div class="text-blue-400 mb-4 text-5xl">
                             <i class="fa-solid fa-gamepad"></i>
@@ -132,7 +136,6 @@
             </div>
         </section>
 
-        <!-- Register Any Game Section (Boxed) -->
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div
@@ -163,7 +166,6 @@
             </div>
         </section>
 
-        <!-- Build Your Library Section (flat) -->
         <section class="py-20 bg-slate-800/50">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
@@ -182,7 +184,6 @@
             </div>
         </section>
 
-        <!-- Privacy Control Section (Boxed) -->
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div
@@ -204,7 +205,6 @@
             </div>
         </section>
 
-        <!-- Choose Your Crew Section (flat) -->
         <section class="py-20 bg-slate-800/50">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
@@ -222,7 +222,6 @@
             </div>
         </section>
 
-        <!-- LFG Post Section (Boxed) -->
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div
@@ -243,10 +242,8 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800">
         <div class="ml-3 mr-6 px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <!-- Disclaimer -->
             <p id="disclaimer" class="md:col-span-4 text-xs text-slate-500 text-center md:text-left">
                 <sup>1</sup>LFGameSync and its developers are not affiliated with, endorsed by, or in any way officially
                 connected with any of the supported stores. All product and company names are trademarks™ or registered®
@@ -254,14 +251,12 @@
                 provide functionality for the bot.
             </p>
 
-            <!-- Centered Links -->
             <div class="md:col-span-4 md:col-start-5 text-center text-slate-400">
                 <p>&copy; 2025 LFGameSync. Built by <a href="https://vulps.co.uk" target="_blank"
                         class="underline hover:text-white transition-colors">Vulps Development.</a></p>
                 <div class="mt-4 flex justify-center items-center gap-x-6">
-                    <!-- Replace # with your actual URLs -->
+                    <a href="https://discord.gg/PxjD25Cc85" class="underline hover:text-white transition-colors">Join the Community</a>
                     <a href="#" class="underline hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="underline hover:text-white transition-colors">Support Server</a>
                     <a href="https://github.com/Vulps22/project-gamer" target="_blank"
                         class="hover:text-white transition-colors text-lg">
                         <i class="fa-brands fa-github"></i>
@@ -269,7 +264,6 @@
                 </div>
             </div>
 
-            <!-- Spacer Column (empty) -->
             <div class="hidden md:block md:col-span-3"></div>
         </div>
     </footer>
