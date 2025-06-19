@@ -1,0 +1,6 @@
+certs/
+
+# Ignore the Vendor directory
+vendor/
+
+.env
