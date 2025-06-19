@@ -346,45 +346,88 @@ if ($response_data && isset($response_data['data']['node'])) {
 
         /* HARDCODED LABEL STYLES - YOU CAN CUSTOMIZE THESE HEX CODES DIRECTLY */
         /* Each class name corresponds to the label's hex color from GitHub API, e.g., 'label-a2eeef' for #a2eeef */
-        .label-enhancement { /* enhancement */
-            background-color:rgb(95, 144, 145);
+        .label-a2eeef { /* enhancement */
+            background-color: #a2eeef;
             color: #1A202C; /* Dark text for contrast */
         }
-        .label-premium-candidate { /* premium-candidate */
-            background-color:rgb(151, 84, 158);
+        .label-d876e3 { /* premium-candidate */
+            background-color: #d876e3;
             color: #1A202C; /* Dark text for contrast */
         }
-        .label-feature { /* feature */
+        .label-b60205 { /* bug-critical */
+            background-color: #b60205;
+            color: #F7FAFC; /* Light text for contrast */
+        }
+        .label-fef2c0 { /* docs-help */
+            background-color: #fef2c0;
+            color: #1A202C; /* Dark text for contrast */
+        }
+        .label-0052cc { /* feature */
             background-color: #0052cc;
+            color: #F7FAFC; /* Light text for contrast */
+        }
+        .label-ededed { /* cleanup-general */
+            background-color: #ededed;
+            color: #1A202C; /* Dark text for contrast */
+        }
+        .label-cc317c { /* release-urgent */
+            background-color: #cc317c;
             color: #F7FAFC; /* Light text for contrast */
         }
         .label-7057ff { /* good-first-issue */
             background-color: #7057ff;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-cleanup-aisle-10 { /* cleanup-aisle-10 */
-            background-color:rgb(134, 64, 41); /* You can change this to a darker orange hex if desired */
-            color: #F7FAFC; /* Light text for contrast */
+        .label-c85e3b { /* cleanup-aisle-10 - This is the one you wanted to customize */
+            background-color: #c85e3b; /* Set your desired darker orange hex here, e.g., #a04a2c */
+            color: #F7FAFC; /* Light text for contrast, adjust if needed */
         }
-        .label-not-urgent { /* not-urgent */
+        .label-aaaaaa { /* not-urgent */
             background-color: #aaaaaa;
             color: #1A202C; /* Dark text for contrast */
         }
-        .label-release-ready { /* release-ready */
-            background-color:rgb(41, 99, 24);
+        .label-36851f { /* release-ready */
+            background-color: #36851f;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-premium { /* premium */
-            background-color:rgb(126, 69, 153);
+        .label-c869f5 { /* premium */
+            background-color: #c869f5;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-documentation { /* documentation */
-            background-color:rgb(0, 79, 136);
+        .label-0075ca { /* documentation */
+            background-color: #0075ca;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-bug { /* bug */
-            background-color:rgb(131, 33, 43);
+        .label-d73a4a { /* bug */
+            background-color: #d73a4a;
             color: #F7FAFC; /* Light text for contrast */
+        }
+
+        /* Style for vertical scrolling within columns */
+        .column-content-scroll {
+            max-height: 48vh; /* Adjusted max-height to 50% of viewport height */
+            min-height: 250px; /* Added a minimum height to prevent collapse when empty */
+            overflow-y: auto;
+            padding-right: 1rem; /* Add padding to prevent scrollbar from obscuring content */
+        }
+
+        /* Custom scrollbar for vertical overflow */
+        .column-content-scroll::-webkit-scrollbar {
+            width: 8px; /* thinner vertical scrollbar */
+        }
+
+        .column-content-scroll::-webkit-scrollbar-track {
+            background: #1E293B; /* slate-800 */
+            border-radius: 4px;
+        }
+
+        .column-content-scroll::-webkit-scrollbar-thumb {
+            background: #475569; /* slate-600 */
+            border-radius: 4px;
+        }
+
+        .column-content-scroll::-webkit-scrollbar-thumb:hover {
+            background: #64748B; /* slate-500 */
         }
     </style>
 </head>
@@ -460,7 +503,8 @@ if ($response_data && isset($response_data['data']['node'])) {
                             <span class="text-xs text-slate-500 font-normal ml-1 whitespace-nowrap"><?php echo htmlspecialchars($col_config['subtext']); ?></span>
                             <?php endif; ?>
                         </h2>
-                        <div class="space-y-3">
+                        <!-- Vertical scrolling content area for the column -->
+                        <div class="space-y-3 column-content-scroll">
                             <?php if (empty($cards)): ?>
                             <div class="text-center text-slate-500 italic py-4">
                                 <?php
