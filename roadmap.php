@@ -346,11 +346,11 @@ if ($response_data && isset($response_data['data']['node'])) {
 
         /* HARDCODED LABEL STYLES - YOU CAN CUSTOMIZE THESE HEX CODES DIRECTLY */
         /* Each class name corresponds to the label's hex color from GitHub API, e.g., 'label-a2eeef' for #a2eeef */
-        .label-a2eeef { /* enhancement */
+        .label-enhancement { /* enhancement */
             background-color: #a2eeef;
             color: #1A202C; /* Dark text for contrast */
         }
-        .label-d876e3 { /* premium-candidate */
+        .label-premium-candidate { /* premium-candidate */
             background-color: #d876e3;
             color: #1A202C; /* Dark text for contrast */
         }
@@ -374,31 +374,31 @@ if ($response_data && isset($response_data['data']['node'])) {
             background-color: #cc317c;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-7057ff { /* good-first-issue */
+        .label-good-first-issue { /* good-first-issue */
             background-color: #7057ff;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-c85e3b { /* cleanup-aisle-10 - This is the one you wanted to customize */
+        .label-cleanup-aisle-10 { /* cleanup-aisle-10 - This is the one you wanted to customize */
             background-color: #c85e3b; /* Set your desired darker orange hex here, e.g., #a04a2c */
             color: #F7FAFC; /* Light text for contrast, adjust if needed */
         }
-        .label-aaaaaa { /* not-urgent */
+        .label-not-urgent { /* not-urgent */
             background-color: #aaaaaa;
             color: #1A202C; /* Dark text for contrast */
         }
-        .label-36851f { /* release-ready */
+        .label-release-ready { /* release-ready */
             background-color: #36851f;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-c869f5 { /* premium */
+        .label-premium { /* premium */
             background-color: #c869f5;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-0075ca { /* documentation */
+        .label-documentation { /* documentation */
             background-color: #0075ca;
             color: #F7FAFC; /* Light text for contrast */
         }
-        .label-d73a4a { /* bug */
+        .label-bug { /* bug */
             background-color: #d73a4a;
             color: #F7FAFC; /* Light text for contrast */
         }
